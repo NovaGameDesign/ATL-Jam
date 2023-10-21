@@ -24,6 +24,7 @@ public class TaskAttack : Node
         Transform target = (Transform)GetData("target");
         if (target != _lastTarget)
         {
+
             _playerHealthManager = target.GetComponent<PlayerHealthManager>();
             _lastTarget = target;
         }
