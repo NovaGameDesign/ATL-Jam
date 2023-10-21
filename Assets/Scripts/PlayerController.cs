@@ -125,7 +125,6 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator AttackSequence()
     {
-        print("here");
         animator.SetBool("Attack", true);
         yield return new WaitForSeconds(1.5f);
         animator.SetBool("Attack", false);

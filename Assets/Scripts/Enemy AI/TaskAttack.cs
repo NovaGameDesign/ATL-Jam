@@ -9,7 +9,7 @@ public class TaskAttack : Node
     //private Animator _animator;
 
     private Transform _lastTarget;
-    private EnemyManager _enemyManager;
+    private PlayerHealthManager _enemyManager;
 
     private float _attackTime = 1f;
     private float _attackCounter = 0f;
@@ -24,7 +24,7 @@ public class TaskAttack : Node
         Transform target = (Transform)GetData("target");
         if (target != _lastTarget)
         {
-            _enemyManager = target.GetComponent<EnemyManager>();
+            _enemyManager = target.GetComponent<PlayerHealthManager>();
             _lastTarget = target;
         }
 

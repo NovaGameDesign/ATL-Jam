@@ -17,11 +17,10 @@ public class TaskGoToTarget : Node
     {
         Transform target = (Transform)GetData("target");
 
-        if (Vector3.Distance(_transform.position, target.position) > .9f)
+        if (Vector3.Distance(_transform.position, target.position) > 1.5f)
         {
-            _transform.position = Vector3.MoveTowards(
-                _transform.position, target.position, EnemyBT.speed * Time.deltaTime);
-            _transform.LookAt(target.position);
+            _transform.position = Vector3.MoveTowards(_transform.position, target.position + new Vector3(0,1,0), EnemyBT.speed * Time.deltaTime);
+            _transform.LookAt(target.position + new Vector3(0, 1, 0));
         }
 
         state = NodeState.RUNNING;
