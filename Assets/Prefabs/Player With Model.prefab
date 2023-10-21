@@ -239,7 +239,7 @@ GameObject:
   - component: {fileID: 2315901918634277808}
   - component: {fileID: 6696189955064544077}
   - component: {fileID: 8778492875848058547}
-  - component: {fileID: 4573387465999895825}
+  - component: {fileID: 4026645795044470239}
   m_Layer: 6
   m_Name: Player With Model
   m_TagString: Untagged
@@ -375,7 +375,7 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!136 &4573387465999895825
+--- !u!136 &4026645795044470239
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1433,7 +1433,7 @@ Transform:
   - {fileID: 629420449918913919}
   - {fileID: 7400081815529923099}
   - {fileID: 7855466034753180137}
-  - {fileID: 6692234706712188670}
+  - {fileID: 1412958197549750679}
   m_Father: {fileID: 4300224474938241215}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4586565304173725466
@@ -2629,7 +2629,7 @@ Transform:
   - {fileID: 6953924124995581073}
   m_Father: {fileID: 4778983579433228549}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &6687894443703807772
+--- !u!1001 &1410859702647332981
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -2703,9 +2703,9 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8fc40ebf5a41b30428929f5ba3697759, type: 3}
---- !u!4 &6692234706712188670 stripped
+--- !u!4 &1412958197549750679 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4420664804571618, guid: 8fc40ebf5a41b30428929f5ba3697759,
     type: 3}
-  m_PrefabInstance: {fileID: 6687894443703807772}
+  m_PrefabInstance: {fileID: 1410859702647332981}
   m_PrefabAsset: {fileID: 0}
