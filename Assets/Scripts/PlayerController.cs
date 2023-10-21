@@ -131,4 +131,9 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("Attack", false);
         
     }
+
+    public void EnableGlide()
+    {
+        glide = true;
+    }
 }
