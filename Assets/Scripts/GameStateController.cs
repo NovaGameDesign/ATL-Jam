@@ -22,7 +22,7 @@ public class GameStateController : MonoBehaviour
     public GameObject WinPanel;
 
     // Use this for initialization
-    void Awake()
+    void Start()
     {
         UIM = FindObjectOfType<UserInterfaceManager>();
 
@@ -38,6 +38,8 @@ public class GameStateController : MonoBehaviour
         }
 
     }
+
+
 
     // Update is called once per frame
     void Update()

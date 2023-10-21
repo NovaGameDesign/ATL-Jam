@@ -486,6 +486,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInput: {fileID: 1963985722628607047}
+  clampAmount: 70
 --- !u!1 &8128672863296757068
 GameObject:
   m_ObjectHideFlags: 0
@@ -536,6 +537,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeedModifier: 5
+  sprintModifier: 3
   jumpMultiplier: 5
   playerInput: {fileID: 1963985722628607047}
   rb: {fileID: 8382869453484752321}
