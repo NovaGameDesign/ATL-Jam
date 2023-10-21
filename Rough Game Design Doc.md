@@ -1,11 +1,13 @@
-Game Title: Realm Shift/Plane Shift? (needs work for name)
+Game Title: (needs work for name)
+- Realm Shift - Lynx
+- Plane Shift - Lynx
+- Realm Spinner - JarekQ
 
 Gameplay
 ========
 
 General Play:
 -------------
-
 
 * Spin Wildcard
     * Spin between worlds after a timer *tenative length
@@ -18,3 +20,16 @@ General Play:
     * if all trophies are collected trigger game win
     * if player "dies" or all health is lost reset progress
 
+----------
+Mechanics
+----------
+
+
+
+----------
+Dynamics
+----------
+
+----------
+Aesthetics
+----------
