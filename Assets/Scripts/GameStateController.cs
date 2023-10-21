@@ -26,17 +26,17 @@ public class GameStateController : MonoBehaviour
     {
         UIM = FindObjectOfType<UserInterfaceManager>();
 
+        Debug.Log("GSC | Current Scene = " + SceneManager.GetActiveScene().name);
         // Starts Game at Main Menu
-        if (SceneManager.GetActiveScene().name == "Menu Scene")
+        if (SceneManager.GetActiveScene().name != "Menu Scene")
         {
-            // Do nothing
+            // Upon starting game.EXE, updates UIM level index to Menu Scene
+            UIM.Level1();
+            // UIM level index for Menu Scene passes to LoadLevel
+            LoadLevel();
+            // Menu Scene should appear at start of game
+            Debug.Log("GSC | Current Scene = " + SceneManager.GetActiveScene().name);
         }
-        else if (SceneManager.GetActiveScene().name != "Menu Scene")
-        {
-            // do nothing
-            LoadMainMenu();
-        }
-
     }
 
 
