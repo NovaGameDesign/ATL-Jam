@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyManager : MonoBehaviour
+public class PlayerHealthManager : MonoBehaviour
 {
     [SerializeField] Animator animator;
 
