@@ -9,7 +9,7 @@ public class TaskAttack : Node
     //private Animator _animator;
 
     private Transform _lastTarget;
-    private PlayerHealthManager _enemyManager;
+    private PlayerHealthManager _playerHealthManager;
 
     private float _attackTime = 1f;
     private float _attackCounter = 0f;
@@ -24,14 +24,15 @@ public class TaskAttack : Node
         Transform target = (Transform)GetData("target");
         if (target != _lastTarget)
         {
-            _enemyManager = target.GetComponent<PlayerHealthManager>();
+
+            _playerHealthManager = target.GetComponent<PlayerHealthManager>();
             _lastTarget = target;
         }
 
         _attackCounter += Time.deltaTime;
         if (_attackCounter >= _attackTime)
         {
-            bool enemyIsDead = _enemyManager.TakeHit();
+            bool enemyIsDead = _playerHealthManager.TakeHit();
             if (enemyIsDead)
             {
                 ClearData("target");

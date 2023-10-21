@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerHealthManager : MonoBehaviour
@@ -6,6 +8,7 @@ public class PlayerHealthManager : MonoBehaviour
 
     private int _healthpoints;
 
+
     private void Awake()
     {
         _healthpoints = 30;
@@ -13,21 +16,19 @@ public class PlayerHealthManager : MonoBehaviour
 
     public bool TakeHit()
     {
-        print("hit");
-        
-        //run flinch animation
-
         _healthpoints -= 10;
         bool isDead = _healthpoints <= 0;
-        if (isDead) _Die();
+        if (isDead) 
+            _Die();
         return isDead;
     }
 
     private void _Die()
     {
-        transform.Translate(new Vector3(0,-0.3f,0));
+        transform.Translate(new Vector3(0, -0.3f, 0));
         print("you died");
         animator.SetBool("Dead", true);
         //Destroy(gameObject);
     }
+
 }
