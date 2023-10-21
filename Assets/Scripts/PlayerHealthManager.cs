@@ -16,6 +16,7 @@ public class PlayerHealthManager : MonoBehaviour
 
     public bool TakeHit()
     {
+        animator.SetTrigger("Flinch");
         _healthpoints -= 10;
         bool isDead = _healthpoints <= 0;
         if (isDead) 
