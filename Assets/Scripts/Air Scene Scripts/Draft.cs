@@ -26,7 +26,7 @@ public class Draft : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Physics.BoxCast(collider.bounds.center, transform.localScale/2, transform.up, out hit, transform.rotation, draftDist))
+        if (Physics.BoxCast(collider.bounds.center, transform.lossyScale/ 2, transform.up, out hit, transform.rotation, draftDist))
         {
             if (hit.collider.gameObject == player)
             {

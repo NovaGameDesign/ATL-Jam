@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
             else
             {
                 move = playerInput.actions["Movement"].ReadValue<Vector2>() * movementSpeedModifier;
-                Vector3 t_pos = rb.position + (transform.forward * move.y * movementSpeedModifier * Time.deltaTime) + (transform.right * move.x * movementSpeedModifier * Time.deltaTime);
+                Vector3 t_pos = rb.position + (transform.forward * move.y * (movementSpeedModifier/2) * Time.deltaTime) + (transform.right * move.x * (movementSpeedModifier/2) * Time.deltaTime);
                 Vector3 lerp_pos = Vector3.Lerp(rb.position, t_pos, 0.2f);
 
                 rb.MovePosition(lerp_pos);
