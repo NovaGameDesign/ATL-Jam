@@ -24,7 +24,7 @@ public class TaskAttack : Node
         Transform target = (Transform)GetData("target");
         if (target != _lastTarget)
         {
-            //_enemyManager = target.GetComponent<EnemyManager>();
+            _enemyManager = target.GetComponent<EnemyManager>();
             _lastTarget = target;
         }
 

@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
+    [SerializeField] Animator animator;
+
     private int _healthpoints;
 
     private void Awake()
@@ -11,6 +13,7 @@ public class EnemyManager : MonoBehaviour
 
     public bool TakeHit()
     {
+        print("hit");
         _healthpoints -= 10;
         bool isDead = _healthpoints <= 0;
         if (isDead) _Die();
@@ -19,6 +22,8 @@ public class EnemyManager : MonoBehaviour
 
     private void _Die()
     {
-        Destroy(gameObject);
+        print("you died");
+        animator.SetBool("Dead", true);
+        //Destroy(gameObject);
     }
 }

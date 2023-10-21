@@ -14,11 +14,13 @@ public class PlayerController : MonoBehaviour
     [Header("Object Referenes")]
     [SerializeField] PlayerInput playerInput;
     [SerializeField] Rigidbody rb;
+    [SerializeField] Animator animator;
 
 
     float turnSmoothVelocity;
     Vector2 move;
     bool grounded;
+    bool glide;
 
 
     //Input Related
@@ -39,8 +41,14 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         //get and use player movement
-        move = playerInput.actions["Movement"].ReadValue<Vector2>() * movementSpeedModifier;
-        transform.Translate(move.x * Time.deltaTime, 0, move.y * Time.deltaTime);
+        if (!glide)
+        {
+            move = playerInput.actions["Movement"].ReadValue<Vector2>() * movementSpeedModifier;
+            transform.Translate(move.x * Time.deltaTime, 0, move.y * Time.deltaTime);
+        }
+
+
+        animator.SetBool("Jump", !grounded);
 
         //jump
         if (playerInput.actions["Jump"].triggered)
@@ -48,8 +56,39 @@ public class PlayerController : MonoBehaviour
             if (grounded)
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpMultiplier);
+                
             }
         }
+
+        if (playerInput.actions["Attack"].triggered)
+        {
+            print("started atacj");
+            StartCoroutine(AttackSequence());
+            //animator.Play("slash");
+        }
+
+        //glide movement for air level
+        if (glide)
+        {
+            if (grounded)
+            {
+                glide = false;
+            }
+            else
+            {
+                move = playerInput.actions["Movement"].ReadValue<Vector2>() * movementSpeedModifier;
+                Vector3 t_pos = rb.position + (transform.forward * move.y * (movementSpeedModifier / 2) * Time.deltaTime) + (transform.right * move.x * (movementSpeedModifier / 2) * Time.deltaTime);
+                Vector3 lerp_pos = Vector3.Lerp(rb.position, t_pos, 0.2f);
+
+                rb.MovePosition(lerp_pos);
+            }
+        }
+
+
+
+
+        animator.SetFloat("Vertical", move.y);
+        animator.SetFloat("Horizontal", move.x);
     }
 
     //tells the code if the player is touching the ground
@@ -81,5 +120,15 @@ public class PlayerController : MonoBehaviour
         {
             movementSpeedModifier /= 2;
         }
+    }
+
+
+    IEnumerator AttackSequence()
+    {
+        print("here");
+        animator.SetBool("Attack", true);
+        yield return new WaitForSeconds(1.5f);
+        animator.SetBool("Attack", false);
+        
     }
 }
