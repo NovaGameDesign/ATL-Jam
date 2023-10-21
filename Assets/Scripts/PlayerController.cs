@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Movement Settings")]
     [SerializeField] float movementSpeedModifier;
+    [SerializeField] float sprintModifier;
     [SerializeField] float jumpMultiplier;
 
 
@@ -19,10 +20,20 @@ public class PlayerController : MonoBehaviour
     Vector2 move;
     bool grounded;
 
+
+    //Input Related
+    private InputAction sprint;
+
     private void Awake()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        sprint = playerInput.actions["Sprint"];
+        sprint.performed += EnableSprint;
+        sprint.canceled += EnableSprint;
+  
+
     }
 
     private void Update()
@@ -39,7 +50,6 @@ public class PlayerController : MonoBehaviour
                 rb.velocity = new Vector2(rb.velocity.x, jumpMultiplier);
             }
         }
-
     }
 
     //tells the code if the player is touching the ground
@@ -57,6 +67,19 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag.Equals("Floor"))
         {
             grounded = false;
+        }
+    }
+   
+    private void EnableSprint(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+        {
+            movementSpeedModifier *= 2;
+            //stamina logic? 
+        }
+        if(context.canceled)
+        {
+            movementSpeedModifier /= 2;
         }
     }
 }

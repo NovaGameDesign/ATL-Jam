@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerLook : MonoBehaviour
 {
     [SerializeField] PlayerInput playerInput;
+    [SerializeField] int clampAmount = 70;
     float mouseSens = 100f;
     Vector2 mouseLook;
     float xRotation = 0f;
@@ -28,7 +29,7 @@ public class PlayerLook : MonoBehaviour
 
         xRotation -= mouseY;
 
-        xRotation = Mathf.Clamp(xRotation, -90, 90);
+        xRotation = Mathf.Clamp(xRotation, -clampAmount, clampAmount);
 
         //applies mouse movement
         transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
