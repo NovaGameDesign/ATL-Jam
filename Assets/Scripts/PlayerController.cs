@@ -7,14 +7,17 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Movement Settings")]
     [SerializeField] float movementSpeedModifier;
+    [SerializeField] float jumpMultiplier;
+
 
     [Header("Object Referenes")]
-    [SerializeField] CharacterController characterController;
-    [SerializeField] Transform camera;
+    [SerializeField] PlayerInput playerInput;
+    [SerializeField] Rigidbody rb;
 
 
-    [SerializeField] float turnSmoothTime = 0.1f;
     float turnSmoothVelocity;
+    Vector2 move;
+    bool grounded;
 
     private void Awake()
     {
@@ -24,21 +27,36 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
+        //get and use player movement
+        move = playerInput.actions["Movement"].ReadValue<Vector2>() * movementSpeedModifier;
+        transform.Translate(move.x * Time.deltaTime, 0, move.y * Time.deltaTime);
 
-        Vector3 direction = new Vector3(horizontal, 0f, vertical);
-
-        if(direction.magnitude > 0.1f)
+        //jump
+        if (playerInput.actions["Jump"].triggered)
         {
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + camera.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-            transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
-
-            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            characterController.Move(moveDir.normalized * movementSpeedModifier * Time.deltaTime);
+            if (grounded)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, jumpMultiplier);
+            }
         }
 
-        
+    }
+
+    //tells the code if the player is touching the ground
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag.Equals("Floor"))
+        {
+            grounded = true;
+        }
+    }
+
+    //tells the code if the player is not on the ground
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag.Equals("Floor"))
+        {
+            grounded = false;
+        }
     }
 }
