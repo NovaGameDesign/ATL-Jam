@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyManager : MonoBehaviour
+public class EnemyHealthManager : MonoBehaviour
 {
     [SerializeField] float health;
     [SerializeField] float weaponDamage;
