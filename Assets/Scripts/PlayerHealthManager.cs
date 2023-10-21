@@ -14,6 +14,9 @@ public class PlayerHealthManager : MonoBehaviour
     public bool TakeHit()
     {
         print("hit");
+        
+        //run flinch animation
+
         _healthpoints -= 10;
         bool isDead = _healthpoints <= 0;
         if (isDead) _Die();
@@ -22,6 +25,7 @@ public class PlayerHealthManager : MonoBehaviour
 
     private void _Die()
     {
+        transform.Translate(new Vector3(0,-0.3f,0));
         print("you died");
         animator.SetBool("Dead", true);
         //Destroy(gameObject);
