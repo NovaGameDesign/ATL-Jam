@@ -18,68 +18,37 @@ using UnityEngine.SceneManagement;
 public class GameStateController : MonoBehaviour
 {
     UserInterfaceManager UIM;
-    //public PlayerStats Player1, Player2;
 
-    public GameObject[] fleetBlue, fleetRed;
     public GameObject WinPanel;
 
     // Use this for initialization
-    void Awake()
+    void Start()
     {
         UIM = FindObjectOfType<UserInterfaceManager>();
 
-        if (SceneManager.GetActiveScene().name != "MainMenu")
+        // Starts Game at Main Menu
+        if (SceneManager.GetActiveScene().name == "Menu Scene")
         {
-            //fleetBlue = Player1.GetComponent<PlayerStats>().fleet;
-            //fleetRed = Player2.GetComponent<PlayerStats>().fleet;
+            // Do nothing
+        }
+        else if (SceneManager.GetActiveScene().name != "Menu Scene")
+        {
+            // do nothing
+            LoadMainMenu();
         }
 
-
-        // Starts Game at Main Menu
-        //if (SceneManager.GetActiveScene().name == "MainMenu")
-        //{
-        //    // Do nothing
-        //}
-        //else
-        //{
-        //    LoadMainMenu();
-        //}
     }
+
+
 
     // Update is called once per frame
     void Update()
     {
-        if (SceneManager.GetActiveScene().name != "MainMenu")
+        if (SceneManager.GetActiveScene().name != "Menu Scene")
         {
             if (WinPanel.activeSelf == false)
             {
-                //Win by Conquer
-                if (fleetRed.Length == 0)
-                {
-                    Debug.Log("Player 1 Conquers");
-                    LoadResults(1);
-                }
-
-                if (fleetBlue.Length == 0)
-                {
-                    Debug.Log("Player 2 Conquers");
-                    LoadResults(2);
-                }
-
-                //Win by Conquest
-                /*
-                if (Player1.GetComponent<PlayerStats>().sectorsCaptured == 7)
-                {
-                    Debug.Log("Player 1 Conquests");
-                    LoadResults(3);
-                }
-
-                if (Player2.GetComponent<PlayerStats>().sectorsCaptured == 7)
-                {
-                    Debug.Log("Player 2 Conquests");
-                    LoadResults(4);
-                }
-                */
+                // do nothing
             }
         }
     }
@@ -88,7 +57,7 @@ public class GameStateController : MonoBehaviour
     public void LoadMainMenu()
     {
         Time.timeScale = 1; //Just in case quiting by pause
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("Menu Scene");
     }
 
 
@@ -99,7 +68,12 @@ public class GameStateController : MonoBehaviour
         Victory(winType);
     }
 
-    //Win State Transition
+    /// <summary>
+    /// Victory(int winType) | Purpose:
+    /// Switch statement for opening the WinPanel to present
+    /// various Victory states of the game in the UserInterfaceManager.
+    /// </summary>
+    /// <param name="wT">Interger WinType</param>
     public void Victory(int wT)
     {
         switch (wT)
@@ -127,26 +101,47 @@ public class GameStateController : MonoBehaviour
         }
     }
 
-    //Loads New Game
+    /// <summary>
+    /// LoadLevel() | Purpose:
+    /// Switcth statement that uses the UIM.levelDecider to
+    /// select the target scene to call SceneManager.LoadScene()
+    /// </summary>
     public void LoadLevel()
     {
         switch (UIM.levelDecider)
         {
             case 1:
+                // Menu Scene
                 SceneManager.LoadScene(UIM.levelDecider);
                 break;
-
             case 2:
+                // Air Scene
                 SceneManager.LoadScene(UIM.levelDecider);
                 break;
-
             case 3:
+                // Earth Scene
+                SceneManager.LoadScene(UIM.levelDecider);
+                break;
+            case 4:
+                // Fire Scene
+                SceneManager.LoadScene(UIM.levelDecider);
+                break;
+            case 5:
+                // Water Scene
+                SceneManager.LoadScene(UIM.levelDecider);
+                break;
+            default:
+                // Default Case loads the 'Test Scene'
+                UIM.levelDecider = 0;
                 SceneManager.LoadScene(UIM.levelDecider);
                 break;
         }
     }
 
-    // Shutdown Game Application
+    /// <summary>
+    /// CloseGame() | Purpose:
+    /// Calls Application.Quit() to exit the game completely and terminate the process.
+    /// </summary>
     public void CloseGame()
     {
         Application.Quit();
