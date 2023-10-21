@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     Vector2 move;
     bool grounded;
     bool glide;
+    bool isSprint;
 
 
     //Input Related
@@ -34,7 +35,8 @@ public class PlayerController : MonoBehaviour
         sprint = playerInput.actions["Sprint"];
         sprint.performed += EnableSprint;
         sprint.canceled += EnableSprint;
-  
+        
+        isSprint = false;
 
     }
 
@@ -77,7 +79,11 @@ public class PlayerController : MonoBehaviour
             else
             {
                 move = playerInput.actions["Movement"].ReadValue<Vector2>() * movementSpeedModifier;
-                Vector3 t_pos = rb.position + (transform.forward * move.y * (movementSpeedModifier / 2) * Time.deltaTime) + (transform.right * move.x * (movementSpeedModifier / 2) * Time.deltaTime);
+                Vector3 t_pos = new Vector3(0,0,0);
+                if (!isSprint)
+                { t_pos = rb.position + (transform.forward * move.y * (movementSpeedModifier / 2) * Time.deltaTime) + (transform.right * move.x * (movementSpeedModifier / 2) * Time.deltaTime); }
+                if (isSprint)
+                { t_pos = rb.position + (transform.forward * move.y * (movementSpeedModifier / 4) * Time.deltaTime) + (transform.right * move.x * (movementSpeedModifier / 4) * Time.deltaTime); }
                 Vector3 lerp_pos = Vector3.Lerp(rb.position, t_pos, 0.2f);
 
                 rb.MovePosition(lerp_pos);
@@ -114,11 +120,13 @@ public class PlayerController : MonoBehaviour
         if(context.performed)
         {
             movementSpeedModifier *= 2;
+            isSprint = true;
             //stamina logic? 
         }
         if(context.canceled)
         {
             movementSpeedModifier /= 2;
+            isSprint = false;
         }
     }
 
