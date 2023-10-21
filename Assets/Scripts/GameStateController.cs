@@ -21,9 +21,13 @@ public class GameStateController : MonoBehaviour
 
     public GameObject WinPanel;
 
+    #region Awake & Start
+
     // Use this for initialization
-    void Start()
+    void Awake()
     {
+        Debug.Log("GSC | Awake()");
+
         UIM = FindObjectOfType<UserInterfaceManager>();
 
         Debug.Log("GSC | Current Scene = " + SceneManager.GetActiveScene().name);
@@ -39,16 +43,58 @@ public class GameStateController : MonoBehaviour
         }
     }
 
+    //void Start()
+    //{
+    //    Debug.Log("GSC | Start()");
+    //    UIM = FindObjectOfType<UserInterfaceManager>();
 
+    //    Debug.Log("GSC | Current Scene = " + SceneManager.GetActiveScene().name);
+    //    // Starts Game at Main Menu
+    //    if (SceneManager.GetActiveScene().name != "Menu Scene")
+    //    {
+    //        // Upon starting game.EXE, updates UIM level index to Menu Scene
+    //        UIM.Level1();
+    //        // UIM level index for Menu Scene passes to LoadLevel
+    //        LoadLevel();
+    //        // Menu Scene should appear at start of game
+    //        Debug.Log("GSC | Current Scene = " + SceneManager.GetActiveScene().name);
+    //    }
+    //}
+
+    #endregion
 
     // Update is called once per frame
     void Update()
     {
         if (SceneManager.GetActiveScene().name != "Menu Scene")
         {
+            Debug.Log("GSC | Update() - Not Menu Scene - Check Cursor State");
+            if(Cursor.lockState != CursorLockMode.Locked && Cursor.visible != false)
+            {
+                // Disable Cursor Control and Visibility
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+
+                Debug.Log("Cusor.lockState = " + Cursor.lockState.ToString());
+                Debug.Log("Cusor.visibility = " + Cursor.visible.ToString());
+            }
+
             if (WinPanel.activeSelf == false)
             {
                 // do nothing
+            }
+        }
+        else
+        {
+            Debug.Log("GSC | Update() - Menu Scene - Check Cursor State");
+            if (Cursor.lockState != CursorLockMode.None && Cursor.visible != true)
+            {
+                // Enable Cursor Control and Visibility
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+
+                Debug.Log("Cusor.lockState = " + Cursor.lockState.ToString());
+                Debug.Log("Cusor.visibility = " + Cursor.visible.ToString());
             }
         }
     }
@@ -56,6 +102,7 @@ public class GameStateController : MonoBehaviour
     // Loads Main Menu
     public void LoadMainMenu()
     {
+        Debug.Log("GSC | LoadMainMenu()");
         Time.timeScale = 1; //Just in case quiting by pause
         SceneManager.LoadScene("Menu Scene");
     }
@@ -63,6 +110,7 @@ public class GameStateController : MonoBehaviour
 
     public void LoadResults(int winType)
     {
+        Debug.Log("GSC | LoadResults()");
         WinPanel.SetActive(true);
         Time.timeScale = 0;
         Victory(winType);
@@ -76,6 +124,7 @@ public class GameStateController : MonoBehaviour
     /// <param name="wT">Interger WinType</param>
     public void Victory(int wT)
     {
+        Debug.Log("GSC | Victory("+ wT +")");
         switch (wT)
         {
             case 1:
@@ -108,6 +157,8 @@ public class GameStateController : MonoBehaviour
     /// </summary>
     public void LoadLevel()
     {
+        Debug.Log("GSC | LoadLevel()");
+        Debug.Log("GSC | UIM.levelDecider = " + UIM.levelDecider);
         switch (UIM.levelDecider)
         {
             case 1:
@@ -117,23 +168,38 @@ public class GameStateController : MonoBehaviour
             case 2:
                 // Air Scene
                 SceneManager.LoadScene(UIM.levelDecider);
+                // Enable Cursor Control and Visibility
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
                 break;
             case 3:
                 // Earth Scene
                 SceneManager.LoadScene(UIM.levelDecider);
+                // Enable Cursor Control and Visibility
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
                 break;
             case 4:
                 // Fire Scene
                 SceneManager.LoadScene(UIM.levelDecider);
+                // Enable Cursor Control and Visibility
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
                 break;
             case 5:
                 // Water Scene
                 SceneManager.LoadScene(UIM.levelDecider);
+                // Enable Cursor Control and Visibility
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
                 break;
             default:
                 // Default Case loads the 'Test Scene'
                 UIM.levelDecider = 0;
                 SceneManager.LoadScene(UIM.levelDecider);
+                // Enable Cursor Control and Visibility
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
                 break;
         }
     }
@@ -144,6 +210,7 @@ public class GameStateController : MonoBehaviour
     /// </summary>
     public void CloseGame()
     {
+        Debug.Log("GSC | CloseGame() - Check Built EXE for function success");
         Application.Quit();
     }
 }
