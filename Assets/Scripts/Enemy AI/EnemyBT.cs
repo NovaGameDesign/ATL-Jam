@@ -7,7 +7,7 @@ public class EnemyBT : Tree
 
     public static float speed = 2f;
     public static float fovRange = 6f;
-    public static float attackRange = 1.5f;
+    public static float attackRange = 2f;
 
     protected override Node SetupTree()
     {
