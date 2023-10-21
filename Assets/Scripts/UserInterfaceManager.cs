@@ -17,12 +17,12 @@ using UnityEngine.SceneManagement;
 
 public class UserInterfaceManager : MonoBehaviour
 {
-    public GameObject startPanel, pausePanel, instructionsPanel, optionsPanel, creditsPanel, quitPanel, levelsPanel;
+    public GameObject startPanel, pausePanel, instructionsPanel,
+        optionsPanel, creditsPanel, quitPanel, levelsPanel;
 
     public GameObject title;
     public int levelDecider;
 
-    public GameObject bluePanel, redPanel;
     //public Text redText, blueText;
 
     //public GameObject FadePanel;
@@ -37,7 +37,7 @@ public class UserInterfaceManager : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
-        if (SceneManager.GetActiveScene().name != "MainMenu")
+        if (SceneManager.GetActiveScene().name != "Menu Scene")
         {
             if ((Input.GetKeyDown(KeyCode.Escape)) && (pausePanel.activeSelf == false))
             {
@@ -60,15 +60,16 @@ public class UserInterfaceManager : MonoBehaviour
             instructionsPanel.SetActive(false);
         }
 
-        if (optionsPanel.activeSelf == true)
-        {
-            optionsPanel.SetActive(false);
-        }
+        //if (optionsPanel.activeSelf == true)
+        //{
+        //    optionsPanel.SetActive(false);
+        //}
 
         if (creditsPanel.activeSelf == true)
         {
             creditsPanel.SetActive(false);
         }
+
         if (levelsPanel.activeSelf == true)
         {
             levelsPanel.SetActive(false);
@@ -82,6 +83,7 @@ public class UserInterfaceManager : MonoBehaviour
         Debug.Log("Back Button clicked - Returned to MainMenu");
     }
 
+    #region Pause
     // Pause Game and Open Pause Menu
     public void PauseMenu()
     {
@@ -106,10 +108,13 @@ public class UserInterfaceManager : MonoBehaviour
         Debug.Log("GAMEMANAGER:: TimeScale: " + Time.timeScale);
     }
 
+    #endregion
+
+    #region Instructions
     //This function can be used for both MainMenu and In-Game
     public void OpenInstructions()
     {
-        if (SceneManager.GetActiveScene().name == "MainMenu")
+        if (SceneManager.GetActiveScene().name == "Menu Scene")
         {
             startPanel.SetActive(false);
 
@@ -117,7 +122,7 @@ public class UserInterfaceManager : MonoBehaviour
 
             instructionsPanel.SetActive(true);
 
-            Debug.Log("I opend the instructions");
+            Debug.Log("I opened the instructions");
         }
         else
         {
@@ -146,35 +151,15 @@ public class UserInterfaceManager : MonoBehaviour
 
         Debug.Log("GAMEMANAGER:: TimeScale: " + Time.timeScale);
     }
-    // This function can be used to go to any of our 3 levels in game
-    public void OpenLevels()
-    {
-        if (SceneManager.GetActiveScene().name == "MainMenu")
-        {
-            startPanel.SetActive(false);
 
-            title.SetActive(false);
+    #endregion
 
-            levelsPanel.SetActive(true);
+    #region Options
 
-            Debug.Log("I opened the LEVELS");
-        }
-        else
-        {
-            pausePanel.SetActive(false);
-
-            levelsPanel.SetActive(true);
-
-            Debug.Log("I opened the LEVELS");
-        }
-        levelsPanel.SetActive(true);
-
-        Debug.Log("I opened LEVELS");
-    }
     // This function can be used in MainMenu and In-Game
     public void OpenOptions()
     {
-        if (SceneManager.GetActiveScene().name == "MainMenu")
+        if (SceneManager.GetActiveScene().name == "Menu Scene")
         {
             startPanel.SetActive(false);
 
@@ -214,7 +199,7 @@ public class UserInterfaceManager : MonoBehaviour
     // It will show in MainMenu and after the Results page
     public void ViewCredits()
     {
-        if (SceneManager.GetActiveScene().name == "MainMenu")
+        if (SceneManager.GetActiveScene().name == "Menu Scene")
         {
             startPanel.SetActive(false);
 
@@ -227,7 +212,10 @@ public class UserInterfaceManager : MonoBehaviour
 
     }
 
-    //closes pause panel and brings up the quit panel, asking the player if they really want to quit
+    #endregion
+
+    #region Quit
+    // Closes pause panel and brings up the quit panel, asking the player if they really want to quit
     public void ConfirmQuit()
     {
         pausePanel.SetActive(false);
@@ -247,15 +235,43 @@ public class UserInterfaceManager : MonoBehaviour
         Debug.Log("GAMEMANAGER:: TimeScale: " + Time.timeScale);
     }
 
+    #endregion
+
     #region Level Decider
 
-    // Follwoing methods handles selection of levels Based on Ints. Once level is clicked, the start button will appear with the scene number loaded in. 
+    // This function can be used to go to any of our 3 levels in game
+    public void OpenLevels()
+    {
+        if (SceneManager.GetActiveScene().name == "Menu Scene")
+        {
+            startPanel.SetActive(false);
+
+            title.SetActive(false);
+
+            levelsPanel.SetActive(true);
+
+            Debug.Log("UIM - startPanel = false | levelsPanel = true");
+        }
+        else
+        {
+            pausePanel.SetActive(false);
+
+            levelsPanel.SetActive(true);
+
+            Debug.Log("UIM - puasePanel = false | levelsPanel = true");
+        }
+        levelsPanel.SetActive(true);
+
+        Debug.Log("UIM - levelsPanel = true");
+    }
+
+    // Following methods handles selection of levels Based on Ints.
+    // Once level is clicked, the start button will appear with the scene number loaded in.
     public void Level1()
     {
         levelDecider = 1;
         Debug.Log("You are currently going to level" + levelDecider);
     }
-
     public void Level2()
     {
         levelDecider = 2;
@@ -264,6 +280,16 @@ public class UserInterfaceManager : MonoBehaviour
     public void Level3()
     {
         levelDecider = 3;
+        Debug.Log("You are currently going to level" + levelDecider);
+    }
+    public void Level4()
+    {
+        levelDecider = 4;
+        Debug.Log("You are currently going to level" + levelDecider);
+    }
+    public void Level5()
+    {
+        levelDecider = 5;
         Debug.Log("You are currently going to level" + levelDecider);
     }
 
@@ -292,31 +318,6 @@ public class UserInterfaceManager : MonoBehaviour
     }
 
     /*
-    public void BlueConquest()
-    {
-        blueText.text = "Victory by Conquest!!!";
-        redText.text = "Defeat by Conquest...";
-    }
-
-    public void BlueConquer()
-    {
-        blueText.text = "Victory by Conquer!!!";
-        redText.text = "Defeat by Conquer...";
-    }
-
-    public void RedConquest()
-    {
-        blueText.text = "Defeat by Conquest...";
-        redText.text = "Victory by Conquest!!!";
-    }
-
-    public void RedConquer()
-    {
-        blueText.text = "Defeat by Conquer...";
-        redText.text = "Victory by Conquer!!!";
-    }
-    
-
     //Call fading out
     public void Fade()
     {
