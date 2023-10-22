@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 
 /// <summary>
 /// User Interface Manager
@@ -20,17 +22,37 @@ using UnityEngine.SceneManagement;
 public class UserInterfaceManager : MonoBehaviour
 {
     public GameObject startPanel, pausePanel, instructionsPanel,
-        optionsPanel, creditsPanel, quitPanel, levelsPanel, inGamePanel;
+        optionsPanel, creditsPanel, quitPanel, levelsPanel, gamePanel, victoryPanel;
 
-    public GameObject title;
+    public TMP_Text healthText, scoreText;
+
     public int levelIndex;
     private Unity.Mathematics.Random random;
+
+    public Transform centerPoint;
+    public Transform edgePoint;
+    public Transform camera;
+    public Transform cameraRotatePoint;
+    public float spinTime;
+    public Transform[] worldWaypoints;
+    List<int> completedLevelIndexes;
+
+    bool spinning = false;
 
     #region Awake Start Update
 
     public void Awake()
     {
-        
+        camera.LookAt(centerPoint);
+        completedLevelIndexes = new List<int>();
+
+        //if (SceneManager.GetActiveScene().buildIndex == 1)
+        //{
+        //    PlayerPrefs.SetInt("AirWin", 0);
+        //    PlayerPrefs.SetInt("EarthWin", 0);
+        //    PlayerPrefs.SetInt("FireWin", 0);
+        //    PlayerPrefs.SetInt("WaterWin", 0);
+        //}
     }
 
     public void Start()
@@ -41,6 +63,24 @@ public class UserInterfaceManager : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
+        if(PlayerPrefs.GetInt("AirWin") == 1 && !completedLevelIndexes.Contains(2))
+        {
+            completedLevelIndexes.Add(2);
+        }
+        if (PlayerPrefs.GetInt("EarthWin") == 1 && !completedLevelIndexes.Contains(3))
+        {
+            completedLevelIndexes.Add(3);
+        }
+        if (PlayerPrefs.GetInt("FireWin") == 1 && !completedLevelIndexes.Contains(4))
+        {
+            completedLevelIndexes.Add(4);
+        }
+        if (PlayerPrefs.GetInt("WaterWin") == 1 && !completedLevelIndexes.Contains(5))
+        {
+            completedLevelIndexes.Add(5);
+        }
+
+
         if (SceneManager.GetActiveScene().name != "Menu Scene")
         {
             if ((Input.GetKeyDown(KeyCode.Escape)) && (pausePanel.activeSelf == false))
@@ -53,7 +93,49 @@ public class UserInterfaceManager : MonoBehaviour
                 UnPauseMenu();
             }
         }
-        TestScores();
+
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            StartCoroutine(selectWorld());
+        }
+
+
+        if (spinning)
+        {
+            camera.position = cameraRotatePoint.position;
+            centerPoint.Rotate(0, 1f, 0, Space.Self);
+            camera.LookAt(edgePoint);
+        }
+    }
+
+    IEnumerator selectWorld()
+    {
+        spinning = true;
+        yield return new WaitForSeconds(spinTime);
+
+
+        do
+        {
+            levelIndex = UnityEngine.Random.Range(2, 6);
+            if (levelIndex < 2)
+            {
+                levelIndex = 2;
+            }
+            if (levelIndex > 5)
+            {
+                levelIndex = 5;
+            }
+        } while (completedLevelIndexes.Contains(levelIndex));
+
+
+        
+        Debug.Log("UIM | levelDecide = " + levelIndex);
+        spinning = false;
+        camera.LookAt(worldWaypoints[levelIndex-2]);
+        yield return new WaitForSeconds(5f);
+
+        
+        FindObjectOfType<GameStateController>().LoadLevel();
 
     }
 
@@ -86,11 +168,35 @@ public class UserInterfaceManager : MonoBehaviour
         // Enabling StartMenu to True
         startPanel.SetActive(true);
 
-        title.SetActive(true);
-
         Debug.Log("Back Button clicked - Returned to MainMenu");
     }
+
+    public void BackToMainMenuFromLevel()
+    {
+        SceneManager.LoadScene("Menu Scene");
+
+        Debug.Log("UIM - BackToMainMenuFromLevel");
+    }
     #endregion
+
+
+    #region GameUI
+
+    public void setHealthText(string text)
+    {
+        healthText.text = text;
+
+
+        
+    }
+
+    public void setScoreText(string text)
+    {
+        scoreText.text = text;
+    }
+
+    #endregion
+
 
     #region Pause
     // Pause Game and Open Pause Menu
@@ -99,7 +205,7 @@ public class UserInterfaceManager : MonoBehaviour
         if (pausePanel.activeSelf == false)
         {
             pausePanel.SetActive(true);
-            inGamePanel.SetActive(false);
+            gamePanel.SetActive(false);
             Time.timeScale = 0.0f;
         }
         Debug.Log("UIM | TimeScale = " + Time.timeScale);
@@ -111,7 +217,7 @@ public class UserInterfaceManager : MonoBehaviour
         if (pausePanel.activeSelf == true)
         {
             pausePanel.SetActive(false);
-            inGamePanel.SetActive(true);
+            gamePanel.SetActive(true);
             Time.timeScale = 1.0f;
         }
         Debug.Log("UIM | TimeScale = " + Time.timeScale);
@@ -126,8 +232,6 @@ public class UserInterfaceManager : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "Menu Scene")
         {
             startPanel.SetActive(false);
-
-            title.SetActive(false);
 
             instructionsPanel.SetActive(true);
 
@@ -172,8 +276,6 @@ public class UserInterfaceManager : MonoBehaviour
         {
             startPanel.SetActive(false);
 
-            title.SetActive(false);
-
             optionsPanel.SetActive(true);
 
             Debug.Log("I opened the OPTIONS");
@@ -201,7 +303,7 @@ public class UserInterfaceManager : MonoBehaviour
 
         pausePanel.SetActive(true);
 
-        Debug.Log("GAMEMANAGER:: TimeScale: " + Time.timeScale);
+        Debug.Log("UIM | TimeScale = " + Time.timeScale);
     }
 
     #endregion
@@ -214,12 +316,10 @@ public class UserInterfaceManager : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "Menu Scene")
         {
             startPanel.SetActive(false);
-
-            title.SetActive(false);
-
             creditsPanel.SetActive(true);
 
-            Debug.Log("I opend the CREDITS");
+            Debug.Log("UIM | startPanel *string* = " + startPanel.activeSelf.ToString());
+            Debug.Log("UIM | startPanel *bool* = " + startPanel.activeSelf);
         }
 
     }
@@ -233,7 +333,7 @@ public class UserInterfaceManager : MonoBehaviour
 
         quitPanel.SetActive(true);
 
-        Debug.Log("GAMEMANAGER:: TimeScale: " + Time.timeScale);
+        Debug.Log("UIM | TimeScale = " + Time.timeScale);
     }
 
     //quit panel will be closed, brings back up pause panel
@@ -243,7 +343,7 @@ public class UserInterfaceManager : MonoBehaviour
 
         pausePanel.SetActive(true);
 
-        Debug.Log("GAMEMANAGER:: TimeScale: " + Time.timeScale);
+        Debug.Log("UIM | TimeScale = " + Time.timeScale);
     }
 
     #endregion
@@ -261,11 +361,9 @@ public class UserInterfaceManager : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "Menu Scene")
         {
             startPanel.SetActive(false);
-            title.SetActive(false);
             levelsPanel.SetActive(true);
 
             Debug.Log("UIM | startPanel = " + startPanel.activeSelf);
-            Debug.Log("UIM | title = " + title.activeSelf);
             Debug.Log("UIM | levelsPanel = " + levelsPanel.activeSelf);
         }
         else
@@ -281,6 +379,12 @@ public class UserInterfaceManager : MonoBehaviour
         Debug.Log("UIM | levelsPanel = " + levelsPanel.activeSelf);
     }
 
+    public void SpinLevels()
+    {
+        levelsPanel.SetActive(false);
+        StartCoroutine(selectWorld());
+    }
+
     /// <summary>
     /// RandomLevel() - Randomly select level and SPIN IT.
     /// 
@@ -290,18 +394,13 @@ public class UserInterfaceManager : MonoBehaviour
     /// NOTES from Lynx:
     /// Use Transform.RotateAround() for the Camera to look an empty object at the center of the terrain
     /// </summary>
-    public void RandomLevel(Camera camera)
-    {
-        GameObject cameraSpawn = GameObject.Find("CameraSpinSpawn");
+    //public void RandomLevel()
+    //{
+    //    levelIndex = random.NextInt(2, 5);
 
-        levelIndex = random.NextInt(2,5);
-
-        camera.transform.Translate(cameraSpawn.transform.position);
-        camera.transform.Rotate(Vector3.down);
-
-        Debug.Log("UIM | levelDecide = " + levelIndex);
-        FindObjectOfType<GameStateController>().LoadLevel();
-    }
+    //    Debug.Log("UIM | levelDecide = " + levelIndex);
+    //    FindObjectOfType<GameStateController>().LoadLevel();
+    //}
 
     /// <summary>
     /// OnClick() Methods for UIM
@@ -343,40 +442,6 @@ public class UserInterfaceManager : MonoBehaviour
     }
     #endregion
 
-    #endregion
-
-    #region Victory/Lose UI
-
-    public void TestScores()
-    {
-        if (Input.GetKey(KeyCode.Keypad1))
-        {
-            //BlueConquer();
-        }
-        if (Input.GetKey(KeyCode.Keypad2))
-        {
-            //BlueConquest();
-        }
-        if (Input.GetKey(KeyCode.Keypad3))
-        {
-            //RedConquer();
-        }
-        if (Input.GetKey(KeyCode.Keypad4))
-        {
-            //RedConquest();
-        }
-    }
-
-    /*
-    //Call fading out
-    public void Fade()
-    {
-        FadeTransition fade = FadePanel.GetComponent<FadeTransition>();
-
-        if (levelDecider != 0)
-            fade.fadingOut = true;
-    }
-    */
     #endregion
 
 }

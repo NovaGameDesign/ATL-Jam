@@ -65,4 +65,10 @@ public class PlayerHealthManager : MonoBehaviour
             rockDamageTImer = 0;
         }
     }
+
+    // GetHealthPoints() - returns current health value
+    public float GetHealthPoints()
+    {
+        return _healthpoints;
+    }
 }
