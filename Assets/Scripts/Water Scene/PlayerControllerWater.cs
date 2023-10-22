@@ -49,7 +49,7 @@ public class PlayerControllerWater : MonoBehaviour
         //get and use player movement
         move = playerInput.actions["Movement"].ReadValue<Vector2>() * movementSpeedModifier;
         cf.relativeForce = new Vector3(0f, 0f, constForward);
-        cf.relativeForce = cf.relativeForce + new Vector3((move.x*2), 0f, move.y);
+        cf.relativeForce = cf.relativeForce + new Vector3((move.x*4), 0f, move.y);
 
 
 
