@@ -30,7 +30,7 @@ public class TaskAttack : Node
         }
 
         _attackCounter += Time.deltaTime;
-        if (_attackCounter >= _attackTime)
+        if (_attackCounter >= _attackTime && _playerHealthManager != null)
         {
             bool enemyIsDead = _playerHealthManager.TakeHit();
             if (enemyIsDead)
