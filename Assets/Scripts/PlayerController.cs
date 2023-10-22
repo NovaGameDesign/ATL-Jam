@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     float turnSmoothVelocity;
     Vector2 move;
     bool grounded;
+    Transform groundHit;
     bool glide;
     bool isSprint;
 
@@ -42,6 +43,9 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+       
+        grounded = GroundCheck();
+        Debug.Log("The player is: " + grounded);
         //get and use player movement
         if (!glide)
         {
@@ -98,22 +102,22 @@ public class PlayerController : MonoBehaviour
     }
 
     //tells the code if the player is touching the ground
-    private void OnCollisionEnter(Collision collision)
+   /* private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag.Equals("Floor"))
         {
             grounded = true;
         }
-    }
+    }*/
 
     //tells the code if the player is not on the ground
-    private void OnCollisionExit(Collision collision)
+    /*/private void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject.tag.Equals("Floor"))
         {
             grounded = false;
         }
-    }
+    }*/
    
     private void EnableSprint(InputAction.CallbackContext context)
     {
@@ -142,5 +146,18 @@ public class PlayerController : MonoBehaviour
     public void EnableGlide()
     {
         glide = true;
+    }
+
+    private bool GroundCheck()
+    {
+        //If the player is falling or jumping we set it so they are not grounded. 
+        if (rb.velocity.y < -3 || rb.velocity.y > 2)
+        {
+            return false;
+        }
+
+
+        return Physics.Raycast(transform.position, -transform.up, .1f);
+       
     }
 }
