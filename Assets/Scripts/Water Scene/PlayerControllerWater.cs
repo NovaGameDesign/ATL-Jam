@@ -23,6 +23,7 @@ public class PlayerControllerWater : MonoBehaviour
     float turnSmoothVelocity;
     Vector2 move;
     bool grounded;
+    Transform groundHit;
     bool glide;
 
 
@@ -44,10 +45,11 @@ public class PlayerControllerWater : MonoBehaviour
 
     private void Update()
     {
+        grounded = GroundCheck();
         //get and use player movement
         move = playerInput.actions["Movement"].ReadValue<Vector2>() * movementSpeedModifier;
         cf.relativeForce = new Vector3(0f, 0f, constForward);
-        cf.relativeForce = cf.relativeForce + new Vector3((move.x*2), 0f, move.y);
+        cf.relativeForce = cf.relativeForce + new Vector3((move.x*4), 0f, move.y);
 
 
 
@@ -78,7 +80,7 @@ public class PlayerControllerWater : MonoBehaviour
     }
 
     //tells the code if the player is touching the ground
-    private void OnCollisionEnter(Collision collision)
+    /*private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag.Equals("Floor"))
         {
@@ -93,7 +95,7 @@ public class PlayerControllerWater : MonoBehaviour
         {
             grounded = false;
         }
-    }
+    }*/
    
     private void EnableSprint(InputAction.CallbackContext context)
     {
@@ -115,5 +117,18 @@ public class PlayerControllerWater : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         animator.SetBool("Attack", false);
         
+    }
+
+    private bool GroundCheck()
+    {
+        //If the player is falling or jumping we set it so they are not grounded. 
+        if (rb.velocity.y < -3 || rb.velocity.y > 2)
+        {
+            return false;
+        }
+
+
+        return Physics.Raycast(transform.position, -transform.up, .1f);
+
     }
 }
