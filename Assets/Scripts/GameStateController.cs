@@ -96,6 +96,24 @@ public class GameStateController : MonoBehaviour
     }
     #endregion
 
+    #region Mouse State Control
+
+    private void CursorEnabled()
+    {
+        // Enable Cursor Control and Visibility
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    private void CursorDisabled()
+    {
+        // Enable Cursor Control and Visibility
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    #endregion
+
     // Loads Main Menu
     public void LoadMainMenu()
     {
