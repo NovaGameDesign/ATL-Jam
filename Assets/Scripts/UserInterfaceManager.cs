@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -22,6 +24,7 @@ public class UserInterfaceManager : MonoBehaviour
 
     public GameObject title;
     public int levelIndex;
+    private Unity.Mathematics.Random random;
 
     #region Awake Start Update
 
@@ -276,6 +279,28 @@ public class UserInterfaceManager : MonoBehaviour
         levelsPanel.SetActive(true);
 
         Debug.Log("UIM | levelsPanel = " + levelsPanel.activeSelf);
+    }
+
+    /// <summary>
+    /// RandomLevel() - Randomly select level and SPIN IT.
+    /// 
+    /// Spin the rotation gradually and stop on the selected level, then use GSC to change to the level.
+    /// 
+    /// 
+    /// NOTES from Lynx:
+    /// Use Transform.RotateAround() for the Camera to look an empty object at the center of the terrain
+    /// </summary>
+    public void RandomLevel(Camera camera)
+    {
+        GameObject cameraSpawn = GameObject.Find("CameraSpinSpawn");
+
+        levelIndex = random.NextInt(2,5);
+
+        camera.transform.Translate(cameraSpawn.transform.position);
+        camera.transform.Rotate(Vector3.down);
+
+        Debug.Log("UIM | levelDecide = " + levelIndex);
+        FindObjectOfType<GameStateController>().LoadLevel();
     }
 
     /// <summary>
