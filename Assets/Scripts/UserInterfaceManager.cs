@@ -29,6 +29,9 @@ public class UserInterfaceManager : MonoBehaviour
     public Transform edgePoint;
     public Transform camera;
     public Transform cameraRotatePoint;
+    public float spinTime;
+    public Transform[] worldWaypoints;
+    List<int> completedLevelIndexes;
 
     bool spinning = false;
 
@@ -62,7 +65,7 @@ public class UserInterfaceManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            spinning = true;
+            StartCoroutine(selectWorld());
         }
 
 
@@ -72,6 +75,37 @@ public class UserInterfaceManager : MonoBehaviour
             centerPoint.Rotate(0, 1f, 0, Space.Self);
             camera.LookAt(edgePoint);
         }
+    }
+
+    IEnumerator selectWorld()
+    {
+        spinning = true;
+        yield return new WaitForSeconds(spinTime);
+
+
+        do
+        {
+            levelIndex = UnityEngine.Random.Range(2, 6);
+            if (levelIndex < 0)
+            {
+                levelIndex = 0;
+            }
+            if (levelIndex > 4)
+            {
+                levelIndex = 4;
+            }
+        } while (!completedLevelIndexes.Contains(levelIndex));
+
+
+        
+        Debug.Log("UIM | levelDecide = " + levelIndex);
+        spinning = false;
+        camera.LookAt(worldWaypoints[levelIndex-2]);
+        yield return new WaitForSeconds(5f);
+
+        
+        //FindObjectOfType<GameStateController>().LoadLevel();
+
     }
 
     #endregion
@@ -297,18 +331,13 @@ public class UserInterfaceManager : MonoBehaviour
     /// NOTES from Lynx:
     /// Use Transform.RotateAround() for the Camera to look an empty object at the center of the terrain
     /// </summary>
-    public void RandomLevel(Camera camera)
-    {
-        GameObject cameraSpawn = GameObject.Find("CameraSpinSpawn");
+    //public void RandomLevel()
+    //{
+    //    levelIndex = random.NextInt(2, 5);
 
-        levelIndex = random.NextInt(2, 5);
-
-        camera.transform.Translate(cameraSpawn.transform.position);
-        camera.transform.Rotate(Vector3.down);
-
-        Debug.Log("UIM | levelDecide = " + levelIndex);
-        FindObjectOfType<GameStateController>().LoadLevel();
-    }
+    //    Debug.Log("UIM | levelDecide = " + levelIndex);
+    //    FindObjectOfType<GameStateController>().LoadLevel();
+    //}
 
     /// <summary>
     /// OnClick() Methods for UIM
