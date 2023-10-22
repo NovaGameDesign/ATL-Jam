@@ -64,16 +64,7 @@ public class GameStateController : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name != "Menu Scene")
         {
-            Debug.Log("GSC | Update() - Not Menu Scene - Check Cursor State");
-            if (Cursor.lockState != CursorLockMode.Locked && Cursor.visible != false)
-            {
-                // Disable Cursor Control and Visibility
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-
-                Debug.Log("Cusor.lockState = " + Cursor.lockState.ToString());
-                Debug.Log("Cusor.visibility = " + Cursor.visible.ToString());
-            }
+            CursorDisabled();
 
             if (UIM.victoryPanel.activeSelf == false)
             {
@@ -83,33 +74,53 @@ public class GameStateController : MonoBehaviour
         else
         {
             Debug.Log("GSC | Update() - Menu Scene - Check Cursor State");
-            if (Cursor.lockState != CursorLockMode.None && Cursor.visible != true)
-            {
-                // Enable Cursor Control and Visibility
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-
-                Debug.Log("Cusor.lockState = " + Cursor.lockState.ToString());
-                Debug.Log("Cusor.visibility = " + Cursor.visible.ToString());
-            }
+            CursorEnabled();
         }
     }
     #endregion
 
     #region Mouse State Control
-
+    /// <summary>
+    /// CursorEnabled() - Sets visible to true and disables the lockState.
+    /// </summary>
     private void CursorEnabled()
     {
-        // Enable Cursor Control and Visibility
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-    }
+        if (Cursor.lockState != CursorLockMode.None && Cursor.visible != true)
+        {
+            // Enable Cursor Control and Visibility
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
 
+            Debug.Log("Cusor.lockState = " + Cursor.lockState.ToString());
+            Debug.Log("Cusor.visibility = " + Cursor.visible.ToString());
+        }
+        else
+        {
+            Debug.Log("Cusor Already Enabled");
+            Debug.Log("Cusor.lockState = " + Cursor.lockState.ToString());
+            Debug.Log("Cusor.visibility = " + Cursor.visible.ToString());
+        }
+    }
+    /// <summary>
+    /// CursorEnabled() - Sets visible to false and enables the lockState.
+    /// </summary>
     private void CursorDisabled()
     {
-        // Enable Cursor Control and Visibility
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        if (Cursor.lockState != CursorLockMode.Locked && Cursor.visible != false)
+        {
+            // Disable Cursor Control and Visibility
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+
+            Debug.Log("Cusor.lockState = " + Cursor.lockState.ToString());
+            Debug.Log("Cusor.visibility = " + Cursor.visible.ToString());
+        }
+        else
+        {
+            Debug.Log("Cusor Already Disabled");
+            Debug.Log("Cusor.lockState = " + Cursor.lockState.ToString());
+            Debug.Log("Cusor.visibility = " + Cursor.visible.ToString());
+        }
     }
 
     #endregion
@@ -213,38 +224,23 @@ public class GameStateController : MonoBehaviour
             case 2:
                 // Air Scene
                 SceneManager.LoadScene(UIM.levelIndex);
-                // Enable Cursor Control and Visibility
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
                 break;
             case 3:
                 // Earth Scene
                 SceneManager.LoadScene(UIM.levelIndex);
-                // Enable Cursor Control and Visibility
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
                 break;
             case 4:
                 // Fire Scene
                 SceneManager.LoadScene(UIM.levelIndex);
-                // Enable Cursor Control and Visibility
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
                 break;
             case 5:
                 // Water Scene
                 SceneManager.LoadScene(UIM.levelIndex);
-                // Enable Cursor Control and Visibility
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
                 break;
             default:
                 // Default Case loads the 'Test Scene'
                 UIM.levelIndex = 0;
                 SceneManager.LoadScene(UIM.levelIndex);
-                // Enable Cursor Control and Visibility
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
                 break;
         }
     }
