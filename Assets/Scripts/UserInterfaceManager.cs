@@ -278,6 +278,10 @@ public class UserInterfaceManager : MonoBehaviour
     /// RandomLevel() - Randomly select level and SPIN IT.
     /// 
     /// Spin the rotation gradually and stop on the selected level, then use GSC to change to the level.
+    /// 
+    /// 
+    /// NOTES from Lynx:
+    /// Use Transform.RotateAround() for the Camera to look an empty object at the center of the terrain
     /// </summary>
     public void RandomLevel(Camera camera)
     {
