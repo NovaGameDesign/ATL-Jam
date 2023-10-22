@@ -316,7 +316,7 @@ Transform:
   m_GameObject: {fileID: 809152008}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 627.72363, y: 1699.5721, z: 2016.1256}
+  m_LocalPosition: {x: -286, y: 222, z: 2852}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -894,6 +894,11 @@ PrefabInstance:
       objectReference: {fileID: 1446694496}
     - target: {fileID: 569387177359818812, guid: 9e00fe908d2faa34ca36d8637f033658,
         type: 3}
+      propertyPath: spinTime
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 569387177359818812, guid: 9e00fe908d2faa34ca36d8637f033658,
+        type: 3}
       propertyPath: edgePoint
       value: 
       objectReference: {fileID: 768756105}
@@ -912,6 +917,31 @@ PrefabInstance:
       propertyPath: cameraRotatePoint
       value: 
       objectReference: {fileID: 1792457007}
+    - target: {fileID: 569387177359818812, guid: 9e00fe908d2faa34ca36d8637f033658,
+        type: 3}
+      propertyPath: worldWaypoints.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 569387177359818812, guid: 9e00fe908d2faa34ca36d8637f033658,
+        type: 3}
+      propertyPath: worldWaypoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 1266973561}
+    - target: {fileID: 569387177359818812, guid: 9e00fe908d2faa34ca36d8637f033658,
+        type: 3}
+      propertyPath: worldWaypoints.Array.data[1]
+      value: 
+      objectReference: {fileID: 809152009}
+    - target: {fileID: 569387177359818812, guid: 9e00fe908d2faa34ca36d8637f033658,
+        type: 3}
+      propertyPath: worldWaypoints.Array.data[2]
+      value: 
+      objectReference: {fileID: 1087212688}
+    - target: {fileID: 569387177359818812, guid: 9e00fe908d2faa34ca36d8637f033658,
+        type: 3}
+      propertyPath: worldWaypoints.Array.data[3]
+      value: 
+      objectReference: {fileID: 129040122}
     - target: {fileID: 1183490455376443228, guid: 9e00fe908d2faa34ca36d8637f033658,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
