@@ -927,10 +927,25 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 892887909}
+    - target: {fileID: 1370401694638417338, guid: 9e00fe908d2faa34ca36d8637f033658,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.6313726
+      objectReference: {fileID: 0}
     - target: {fileID: 5038553292597711102, guid: 9e00fe908d2faa34ca36d8637f033658,
         type: 3}
       propertyPath: m_Name
       value: UIM
+      objectReference: {fileID: 0}
+    - target: {fileID: 5183143292459616413, guid: 9e00fe908d2faa34ca36d8637f033658,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5241734077319934540, guid: 9e00fe908d2faa34ca36d8637f033658,
+        type: 3}
+      propertyPath: m_Name
+      value: Spin Button
       objectReference: {fileID: 0}
     - target: {fileID: 5346087923041682301, guid: 9e00fe908d2faa34ca36d8637f033658,
         type: 3}
@@ -980,6 +995,51 @@ PrefabInstance:
     - target: {fileID: 5346087923041682301, guid: 9e00fe908d2faa34ca36d8637f033658,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5869998951889459759, guid: 9e00fe908d2faa34ca36d8637f033658,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SpinLevels
+      objectReference: {fileID: 0}
+    - target: {fileID: 6516773943527627247, guid: 9e00fe908d2faa34ca36d8637f033658,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -81.38
+      objectReference: {fileID: 0}
+    - target: {fileID: 7012943715879183584, guid: 9e00fe908d2faa34ca36d8637f033658,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7091270805356961963, guid: 9e00fe908d2faa34ca36d8637f033658,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7479933849873497319, guid: 9e00fe908d2faa34ca36d8637f033658,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7714964271296688689, guid: 9e00fe908d2faa34ca36d8637f033658,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8010484738102102954, guid: 9e00fe908d2faa34ca36d8637f033658,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8677368104749292329, guid: 9e00fe908d2faa34ca36d8637f033658,
+        type: 3}
+      propertyPath: m_text
+      value: Spin It!
+      objectReference: {fileID: 0}
+    - target: {fileID: 9123544198194557089, guid: 9e00fe908d2faa34ca36d8637f033658,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

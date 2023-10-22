@@ -44,15 +44,15 @@ public class UserInterfaceManager : MonoBehaviour
     public void Awake()
     {
         camera.LookAt(centerPoint);
-        //completedLevelIndexes = new List<int>();
+        completedLevelIndexes = new List<int>();
 
-        if (SceneManager.GetActiveScene().buildIndex == 1)
-        {
-            PlayerPrefs.SetInt("AirWin", 0);
-            PlayerPrefs.SetInt("EarthWin", 0);
-            PlayerPrefs.SetInt("FireWin", 0);
-            PlayerPrefs.SetInt("WaterWin", 0);
-        }
+        //if (SceneManager.GetActiveScene().buildIndex == 1)
+        //{
+        //    PlayerPrefs.SetInt("AirWin", 0);
+        //    PlayerPrefs.SetInt("EarthWin", 0);
+        //    PlayerPrefs.SetInt("FireWin", 0);
+        //    PlayerPrefs.SetInt("WaterWin", 0);
+        //}
     }
 
     public void Start()
@@ -135,7 +135,7 @@ public class UserInterfaceManager : MonoBehaviour
         yield return new WaitForSeconds(5f);
 
         
-        //FindObjectOfType<GameStateController>().LoadLevel();
+        FindObjectOfType<GameStateController>().LoadLevel();
 
     }
 
@@ -169,6 +169,13 @@ public class UserInterfaceManager : MonoBehaviour
         startPanel.SetActive(true);
 
         Debug.Log("Back Button clicked - Returned to MainMenu");
+    }
+
+    public void BackToMainMenuFromLevel()
+    {
+        SceneManager.LoadScene("Menu Scene");
+
+        Debug.Log("UIM - BackToMainMenuFromLevel");
     }
     #endregion
 
@@ -370,6 +377,12 @@ public class UserInterfaceManager : MonoBehaviour
         levelsPanel.SetActive(true);
 
         Debug.Log("UIM | levelsPanel = " + levelsPanel.activeSelf);
+    }
+
+    public void SpinLevels()
+    {
+        levelsPanel.SetActive(false);
+        StartCoroutine(selectWorld());
     }
 
     /// <summary>

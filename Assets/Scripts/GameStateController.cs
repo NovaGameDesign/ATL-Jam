@@ -29,6 +29,8 @@ public class GameStateController : MonoBehaviour
     public bool waterWin;
 
     public int currentScore, totalScore;
+
+    public int currentSceneIndex;
     
     #region Awake Start Update
     // Use this for initialization
@@ -47,57 +49,62 @@ public class GameStateController : MonoBehaviour
         // Reset Score to New Game
         currentScore = 0;
         totalScore = 4;
-        
+
+        currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+
         Debug.Log("GSC | Current Scene = " + SceneManager.GetActiveScene().name);
         // Starts Game at Main Menu
-        if (SceneManager.GetActiveScene().name != "Menu Scene")
+        if (currentSceneIndex != 1)
         {
             // Upon starting game.EXE, updates UIM level index to Menu Scene
-            UIM.Level1();
+            //UIM.Level1();
             // UIM level index for Menu Scene passes to LoadLevel
-            LoadLevel();
+            //LoadLevel();
             // Menu Scene should appear at start of game
             Debug.Log("GSC | Current Scene = " + SceneManager.GetActiveScene().name);
         }
     }
 
-   
 
 
 
-    //void Start()
-    //{
-    //    Debug.Log("GSC | Start()");
-    //    UIM = FindObjectOfType<UserInterfaceManager>();
 
-    //    Debug.Log("GSC | Current Scene = " + SceneManager.GetActiveScene().name);
-    //    // Starts Game at Main Menu
-    //    if (SceneManager.GetActiveScene().name != "Menu Scene")
-    //    {
-    //        // Upon starting game.EXE, updates UIM level index to Menu Scene
-    //        UIM.Level1();
-    //        // UIM level index for Menu Scene passes to LoadLevel
-    //        LoadLevel();
-    //        // Menu Scene should appear at start of game
-    //        Debug.Log("GSC | Current Scene = " + SceneManager.GetActiveScene().name);
-    //    }
-    //}
+    void Start()
+    {
+        Debug.Log("GSC | Start()");
+        currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+
+    }
+
+    private void FixedUpdate()
+    {
+        TestScores();
+    }
 
     // Update is called once per frame
     void Update()
     {
-        if (SceneManager.GetActiveScene().name != "Menu Scene")
+        if (currentSceneIndex != 1)
         {
             CursorDisabled();
 
             //UIM.gamePanel == true, all other panels are off
             //UIM.gamepanel.healthui updating health and score
-            if (UIM.victoryPanel.activeSelf == false)
+            if (GetVictoryBool(SceneManager.GetActiveScene().buildIndex) == false)
             {
+                
+
                 UIM.gamePanel.SetActive(true);
 
                 UIM.setHealthText("Health: " + PHM.GetHealthPoints() + " / " + PHM.startingHealth);
                 UIM.setScoreText("Score: " + currentScore  + " / " + totalScore);
+
+                if(currentScore == 1)
+                {
+                    UIM.gamePanel.SetActive(false);
+                    UIM.victoryPanel.SetActive(true);
+                    CursorEnabled();
+                }
             }
             else
             {
@@ -191,7 +198,7 @@ public class GameStateController : MonoBehaviour
             if(currentScore <= totalScore && currentScore >= 0)
             {
                 // Increment Score by 1
-                currentScore++;
+                currentScore = 1;
                 Debug.Log("GSC | currentScore = " + currentScore + " / totalScore = " + totalScore);
             }
             else
@@ -204,7 +211,7 @@ public class GameStateController : MonoBehaviour
             if (currentScore <= totalScore && currentScore >= 0)
             {
                 // Decrement Score by 1
-                currentScore--;
+                currentScore = 0;
                 Debug.Log("GSC | currentScore = " + currentScore + " / totalScore = " + totalScore);
             }
             else
@@ -233,7 +240,7 @@ public class GameStateController : MonoBehaviour
         Debug.Log("GSC | LoadResults()");
         UIM.victoryPanel.SetActive(true);
         Time.timeScale = 0.0f;
-        Victory(winType);
+        SetVictoryBool(winType);
     }
 
     /// <summary>
@@ -242,7 +249,7 @@ public class GameStateController : MonoBehaviour
     /// various Victory states of the game in the UserInterfaceManager.
     /// </summary>
     /// <param name="wT">Interger WinType</param>
-    public void Victory(int wT)
+    public void SetVictoryBool(int wT)
     {
         Debug.Log("GSC | Victory(" + wT + ")");
         switch (wT)
@@ -267,6 +274,28 @@ public class GameStateController : MonoBehaviour
                 // Check winType
                 Debug.Log("Win Type = " + wT);
                 break;
+        }
+    }
+
+    public bool GetVictoryBool(int sceneIndex)
+    {
+        Debug.Log("GSC | GetVictoryBool(" + sceneIndex + ")");
+        switch (sceneIndex)
+        {
+            case 2:
+                // Air Win
+                return airWin;
+            case 3:
+                // Earth Win
+                return earthWin;
+            case 4:
+                // Fire Win
+                return fireWin;
+            case 5:
+                // Water Win
+                return waterWin;
+            default:
+                return false; 
         }
     }
 
