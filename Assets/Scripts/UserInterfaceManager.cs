@@ -20,9 +20,8 @@ using UnityEngine.SceneManagement;
 public class UserInterfaceManager : MonoBehaviour
 {
     public GameObject startPanel, pausePanel, instructionsPanel,
-        optionsPanel, creditsPanel, quitPanel, levelsPanel, inGamePanel;
+        optionsPanel, creditsPanel, quitPanel, levelsPanel, gamePanel, victoryPanel;
 
-    public GameObject title;
     public int levelIndex;
     private Unity.Mathematics.Random random;
 
@@ -53,8 +52,6 @@ public class UserInterfaceManager : MonoBehaviour
                 UnPauseMenu();
             }
         }
-        TestScores();
-
     }
 
     #endregion
@@ -86,8 +83,6 @@ public class UserInterfaceManager : MonoBehaviour
         // Enabling StartMenu to True
         startPanel.SetActive(true);
 
-        title.SetActive(true);
-
         Debug.Log("Back Button clicked - Returned to MainMenu");
     }
     #endregion
@@ -99,7 +94,7 @@ public class UserInterfaceManager : MonoBehaviour
         if (pausePanel.activeSelf == false)
         {
             pausePanel.SetActive(true);
-            inGamePanel.SetActive(false);
+            gamePanel.SetActive(false);
             Time.timeScale = 0.0f;
         }
         Debug.Log("UIM | TimeScale = " + Time.timeScale);
@@ -111,7 +106,7 @@ public class UserInterfaceManager : MonoBehaviour
         if (pausePanel.activeSelf == true)
         {
             pausePanel.SetActive(false);
-            inGamePanel.SetActive(true);
+            gamePanel.SetActive(true);
             Time.timeScale = 1.0f;
         }
         Debug.Log("UIM | TimeScale = " + Time.timeScale);
@@ -126,8 +121,6 @@ public class UserInterfaceManager : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "Menu Scene")
         {
             startPanel.SetActive(false);
-
-            title.SetActive(false);
 
             instructionsPanel.SetActive(true);
 
@@ -172,8 +165,6 @@ public class UserInterfaceManager : MonoBehaviour
         {
             startPanel.SetActive(false);
 
-            title.SetActive(false);
-
             optionsPanel.SetActive(true);
 
             Debug.Log("I opened the OPTIONS");
@@ -201,7 +192,7 @@ public class UserInterfaceManager : MonoBehaviour
 
         pausePanel.SetActive(true);
 
-        Debug.Log("GAMEMANAGER:: TimeScale: " + Time.timeScale);
+        Debug.Log("UIM | TimeScale = " + Time.timeScale);
     }
 
     #endregion
@@ -214,12 +205,10 @@ public class UserInterfaceManager : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "Menu Scene")
         {
             startPanel.SetActive(false);
-
-            title.SetActive(false);
-
             creditsPanel.SetActive(true);
 
-            Debug.Log("I opend the CREDITS");
+            Debug.Log("UIM | startPanel *string* = " + startPanel.activeSelf.ToString());
+            Debug.Log("UIM | startPanel *bool* = " + startPanel.activeSelf);
         }
 
     }
@@ -233,7 +222,7 @@ public class UserInterfaceManager : MonoBehaviour
 
         quitPanel.SetActive(true);
 
-        Debug.Log("GAMEMANAGER:: TimeScale: " + Time.timeScale);
+        Debug.Log("UIM | TimeScale = " + Time.timeScale);
     }
 
     //quit panel will be closed, brings back up pause panel
@@ -243,7 +232,7 @@ public class UserInterfaceManager : MonoBehaviour
 
         pausePanel.SetActive(true);
 
-        Debug.Log("GAMEMANAGER:: TimeScale: " + Time.timeScale);
+        Debug.Log("UIM | TimeScale = " + Time.timeScale);
     }
 
     #endregion
@@ -261,11 +250,9 @@ public class UserInterfaceManager : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "Menu Scene")
         {
             startPanel.SetActive(false);
-            title.SetActive(false);
             levelsPanel.SetActive(true);
 
             Debug.Log("UIM | startPanel = " + startPanel.activeSelf);
-            Debug.Log("UIM | title = " + title.activeSelf);
             Debug.Log("UIM | levelsPanel = " + levelsPanel.activeSelf);
         }
         else
@@ -343,40 +330,6 @@ public class UserInterfaceManager : MonoBehaviour
     }
     #endregion
 
-    #endregion
-
-    #region Victory/Lose UI
-
-    public void TestScores()
-    {
-        if (Input.GetKey(KeyCode.Keypad1))
-        {
-            //BlueConquer();
-        }
-        if (Input.GetKey(KeyCode.Keypad2))
-        {
-            //BlueConquest();
-        }
-        if (Input.GetKey(KeyCode.Keypad3))
-        {
-            //RedConquer();
-        }
-        if (Input.GetKey(KeyCode.Keypad4))
-        {
-            //RedConquest();
-        }
-    }
-
-    /*
-    //Call fading out
-    public void Fade()
-    {
-        FadeTransition fade = FadePanel.GetComponent<FadeTransition>();
-
-        if (levelDecider != 0)
-            fade.fadingOut = true;
-    }
-    */
     #endregion
 
 }

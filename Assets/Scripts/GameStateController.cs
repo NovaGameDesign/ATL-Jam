@@ -17,12 +17,10 @@ using UnityEngine.SceneManagement;
 
 public class GameStateController : MonoBehaviour
 {
-    UserInterfaceManager UIM;
+    private UserInterfaceManager UIM;
+    //winPanel = UIM.victoryPanel;
 
-    public GameObject WinPanel;
-
-    #region Awake & Start
-
+    #region Awake Start Update
     // Use this for initialization
     void Awake()
     {
@@ -61,8 +59,6 @@ public class GameStateController : MonoBehaviour
     //    }
     //}
 
-    #endregion
-
     // Update is called once per frame
     void Update()
     {
@@ -79,7 +75,7 @@ public class GameStateController : MonoBehaviour
                 Debug.Log("Cusor.visibility = " + Cursor.visible.ToString());
             }
 
-            if (WinPanel.activeSelf == false)
+            if (UIM.victoryPanel.activeSelf == false)
             {
                 // do nothing
             }
@@ -98,21 +94,52 @@ public class GameStateController : MonoBehaviour
             }
         }
     }
+    #endregion
 
     // Loads Main Menu
     public void LoadMainMenu()
     {
         Debug.Log("GSC | LoadMainMenu()");
-        Time.timeScale = 1; //Just in case quiting by pause
+        Time.timeScale = 1.0f; //Just in case quiting by pause
         SceneManager.LoadScene("Menu Scene");
     }
 
+    #region TestScores
+    /// <summary>
+    /// TestScores() - Press 1 of 3 Keys to Check if the Win/Lose Conditions work as expected.
+    /// 
+    /// Press 'PageUp' to increment score by 1.
+    /// Press 'PageDown' to decrement score by 1.
+    /// Press 'End' to set Player Health to 0.
+    /// </summary>
+    public void TestScores()
+    {
+        if (Input.GetKey(KeyCode.PageUp))
+        {
+            // Increment Score by 1
+        }
+        if (Input.GetKey(KeyCode.PageDown))
+        {
+            // Decrement Score by 1
+        }
+        if (Input.GetKey(KeyCode.End))
+        {
+            // Set Player Health to Zero
+        }
+    }
+    #endregion
 
+    /// <summary>
+    /// LoadResults() - Updates the winType/score value to track game's progression. Reset the timeScale to zero.
+    /// </summary>
+    /// <param name="winType">
+    /// Integer for Win Condition
+    /// </param>
     public void LoadResults(int winType)
     {
         Debug.Log("GSC | LoadResults()");
-        WinPanel.SetActive(true);
-        Time.timeScale = 0;
+        UIM.victoryPanel.SetActive(true);
+        Time.timeScale = 0.0f;
         Victory(winType);
     }
 
@@ -204,6 +231,7 @@ public class GameStateController : MonoBehaviour
         }
     }
 
+    #region Exit Game EXE
     /// <summary>
     /// CloseGame() | Purpose:
     /// Calls Application.Quit() to exit the game completely and terminate the process.
@@ -213,4 +241,5 @@ public class GameStateController : MonoBehaviour
         Debug.Log("GSC | CloseGame() - Check Built EXE for function success");
         Application.Quit();
     }
+    #endregion
 }
