@@ -21,9 +21,7 @@ public class UserInterfaceManager : MonoBehaviour
         optionsPanel, creditsPanel, quitPanel, levelsPanel;
 
     public GameObject title;
-    public int levelDecider;
-
-    //public Text redText, blueText;
+    public int levelIndex;
 
     //public GameObject FadePanel;
     //public FadeTransition fade;
@@ -52,6 +50,8 @@ public class UserInterfaceManager : MonoBehaviour
         TestScores();
 
     }
+
+    #region MainMenu
 
     public void BackToMainMenu()
     {
@@ -82,6 +82,7 @@ public class UserInterfaceManager : MonoBehaviour
 
         Debug.Log("Back Button clicked - Returned to MainMenu");
     }
+    #endregion
 
     #region Pause
     // Pause Game and Open Pause Menu
@@ -237,61 +238,78 @@ public class UserInterfaceManager : MonoBehaviour
 
     #endregion
 
-    #region Level Decider
-
-    // This function can be used to go to any of our 3 levels in game
+    #region Level Selection
+    /// <summary>
+    /// Level Selection
+    /// 
+    /// OpenLevels() - UI Enable/Disable
+    /// 
+    /// OnClick() Methods for UIM - levelIndex Modifiers
+    /// </summary>
     public void OpenLevels()
     {
         if (SceneManager.GetActiveScene().name == "Menu Scene")
         {
             startPanel.SetActive(false);
-
             title.SetActive(false);
-
             levelsPanel.SetActive(true);
 
-            Debug.Log("UIM - startPanel = false | levelsPanel = true");
+            Debug.Log("UIM | startPanel = " + startPanel.activeSelf);
+            Debug.Log("UIM | title = " + title.activeSelf);
+            Debug.Log("UIM | levelsPanel = " + levelsPanel.activeSelf);
         }
         else
         {
             pausePanel.SetActive(false);
-
             levelsPanel.SetActive(true);
 
-            Debug.Log("UIM - puasePanel = false | levelsPanel = true");
+            Debug.Log("UIM | pausePanel = " + pausePanel.activeSelf);
+            Debug.Log("UIM | levelsPanel = " + levelsPanel.activeSelf);
         }
         levelsPanel.SetActive(true);
 
-        Debug.Log("UIM - levelsPanel = true");
+        Debug.Log("UIM | levelsPanel = " + levelsPanel.activeSelf);
     }
 
-    // Following methods handles selection of levels Based on Ints.
-    // Once level is clicked, the start button will appear with the scene number loaded in.
+    /// <summary>
+    /// OnClick() Methods for UIM
+    /// 
+    /// UI Buttons in Canvas will be set to select a given level.
+    /// Each Level#() function assigns the levelIndex to a value.
+    /// Then, it locates the local GSC object and calls LoadLevel().
+    /// </summary>
+    #region OnClick() Methods for UIM
     public void Level1()
     {
-        levelDecider = 1;
-        Debug.Log("You are currently going to level" + levelDecider);
+        levelIndex = 1;
+        Debug.Log("UIM | levelDecide = " + levelIndex);
+        FindObjectOfType<GameStateController>().LoadLevel();
     }
     public void Level2()
     {
-        levelDecider = 2;
-        Debug.Log("You are currently going to level" + levelDecider);
+        levelIndex = 2;
+        Debug.Log("UIM | levelDecide = " + levelIndex);
+        FindObjectOfType<GameStateController>().LoadLevel();
     }
     public void Level3()
     {
-        levelDecider = 3;
-        Debug.Log("You are currently going to level" + levelDecider);
+        levelIndex = 3;
+        Debug.Log("UIM | levelDecide = " + levelIndex);
+        FindObjectOfType<GameStateController>().LoadLevel();
     }
     public void Level4()
     {
-        levelDecider = 4;
-        Debug.Log("You are currently going to level" + levelDecider);
+        levelIndex = 4;
+        Debug.Log("UIM | levelDecide = " + levelIndex);
+        FindObjectOfType<GameStateController>().LoadLevel();
     }
     public void Level5()
     {
-        levelDecider = 5;
-        Debug.Log("You are currently going to level" + levelDecider);
+        levelIndex = 5;
+        Debug.Log("UIM | levelDecide = " + levelIndex);
+        FindObjectOfType<GameStateController>().LoadLevel();
     }
+    #endregion
 
     #endregion
 

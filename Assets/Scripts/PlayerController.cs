@@ -30,8 +30,8 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
 
         sprint = playerInput.actions["Sprint"];
         sprint.performed += EnableSprint;
