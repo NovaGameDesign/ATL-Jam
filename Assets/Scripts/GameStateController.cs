@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Transactions;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -27,7 +28,7 @@ public class GameStateController : MonoBehaviour
     public bool fireWin;
     public bool waterWin;
 
-    public int score;
+    public int currentScore, totalScore;
     
     #region Awake Start Update
     // Use this for initialization
@@ -43,7 +44,8 @@ public class GameStateController : MonoBehaviour
         fireWin = false;
         waterWin = false;
         // Reset Score to New Game
-        score = 0;
+        currentScore = 0;
+        totalScore = 4;
         
         Debug.Log("GSC | Current Scene = " + SceneManager.GetActiveScene().name);
         // Starts Game at Main Menu
@@ -162,13 +164,29 @@ public class GameStateController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.PageUp))
         {
-            // Increment Score by 1
-            score++;
+            if(currentScore <= totalScore && currentScore >= 0)
+            {
+                // Increment Score by 1
+                currentScore++;
+                Debug.Log("GSC | currentScore = " + currentScore + " / totalScore = " + totalScore);
+            }
+            else
+            {
+                Debug.Log("GSC | currentScore = " + currentScore + " / totalScore = " + totalScore);
+            }
         }
         if (Input.GetKey(KeyCode.PageDown))
         {
-            // Decrement Score by 1
-            score--;
+            if (currentScore <= totalScore && currentScore >= 0)
+            {
+                // Decrement Score by 1
+                currentScore--;
+                Debug.Log("GSC | currentScore = " + currentScore + " / totalScore = " + totalScore);
+            }
+            else
+            {
+                Debug.Log("GSC | currentScore = " + currentScore + " / totalScore = " + totalScore);
+            }
         }
         if (Input.GetKey(KeyCode.End))
         {
