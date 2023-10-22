@@ -32,15 +32,17 @@ public class EnemyHealthManager : MonoBehaviour
             
         }
         bool playerAttacking = playerController.getAttacking();
+
+        
+
         if (withinRadius && playerAttacking && currentTime >= damageCooldown)
             StartCoroutine(takeDamage());
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag.Equals("Attack Radius"))
+        if (other.tag.Equals("Sword"))
         {
-            print("within radius");
             withinRadius = true;
         }
 
@@ -48,7 +50,7 @@ public class EnemyHealthManager : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag.Equals("Attack Radius"))
+        if (other.tag.Equals("Sword"))
         {
             withinRadius = false; ;
         }
@@ -57,7 +59,6 @@ public class EnemyHealthManager : MonoBehaviour
     IEnumerator takeDamage()
     {
         currentTime = 0;
-        print("took " + weaponDamage + " damage");
         yield return new WaitForSeconds(damageCooldown);
         health -= weaponDamage;
         

@@ -8,17 +8,19 @@ public class PlayerHealthManager : MonoBehaviour
 
     public float startingHealth = 100;
     private float _healthpoints;
+    PlayerController playerController;
 
 
     private void Awake()
     {
         _healthpoints = startingHealth;
+        playerController = this.gameObject.GetComponent<PlayerController>();
     }
 
     public bool TakeHit()
     {
         animator.SetTrigger("Flinch");
-        _healthpoints -= 10;
+        _healthpoints -= 5;
         bool isDead = _healthpoints <= 0;
         if (isDead) 
             _Die();
@@ -30,6 +32,7 @@ public class PlayerHealthManager : MonoBehaviour
         transform.Translate(new Vector3(0, -0.3f, 0));
         print("you died");
         animator.SetBool("Dead", true);
+        playerController.isDead = true;
         //Destroy(gameObject);
     }
 
@@ -39,6 +42,15 @@ public class PlayerHealthManager : MonoBehaviour
         if(_healthpoints > startingHealth)
         {
             _healthpoints = startingHealth;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag.Equals("Enemy Bullet") && !this.tag.Equals("Attack Radius"))
+        {
+            TakeHit();
+            Destroy(other.gameObject);
         }
     }
 }

@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     bool glide;
     bool isSprint;
     bool attacking;
+    [HideInInspector]public bool isDead = false;
 
 
     //Input Related
@@ -50,8 +51,13 @@ public class PlayerController : MonoBehaviour
         //get and use player movement
         if (!glide)
         {
-            move = playerInput.actions["Movement"].ReadValue<Vector2>() * movementSpeedModifier;
-            transform.Translate(move.x * Time.deltaTime, 0, move.y * Time.deltaTime);
+
+            if (!isDead)
+            {
+                move = playerInput.actions["Movement"].ReadValue<Vector2>() * movementSpeedModifier;
+                transform.Translate(move.x * Time.deltaTime, 0, move.y * Time.deltaTime);
+            }
+            
         }
 
 
