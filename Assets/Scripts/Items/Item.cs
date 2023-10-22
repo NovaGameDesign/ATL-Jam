@@ -58,15 +58,17 @@ public abstract class Item : MonoBehaviour
         if(Type == itemType.Consumable ||  Type == itemType.KeyItem || Type == itemType.Power)
         {
             var player = collision.gameObject?.GetComponent<InteractionSystem>();
-            if(player.playerIsInteracting)
+            if(player != null && player.playerIsInteracting)
             {
                 if(player.Items.Count < 6)
                 {
                     Destroy(hoverTextUI);
+                    gameObject.GetComponent<BoxCollider>().enabled = false;
+
                     gameObject.transform.SetParent(player.leftAttachPoint);
                     gameObject.transform.position = player.leftAttachPoint.position;
                     gameObject.transform.rotation = player.transform.rotation;
-
+                    
                     player.Items.Add(gameObject);                    
                     this.gameObject.SetActive(false);
                     Debug.Log("Added an item the player's inventory");

@@ -6,12 +6,13 @@ public class PlayerHealthManager : MonoBehaviour
 {
     [SerializeField] Animator animator;
 
-    private int _healthpoints;
+    public float startingHealth = 100;
+    private float _healthpoints;
 
 
     private void Awake()
     {
-        _healthpoints = 30;
+        _healthpoints = startingHealth;
     }
 
     public bool TakeHit()
@@ -32,4 +33,12 @@ public class PlayerHealthManager : MonoBehaviour
         //Destroy(gameObject);
     }
 
+    public void IncreaseHealth(float heal)
+    {
+        _healthpoints += heal;
+        if(_healthpoints > startingHealth)
+        {
+            _healthpoints = startingHealth;
+        }
+    }
 }
