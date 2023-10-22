@@ -7,7 +7,12 @@ public class EnemyHealthManager : MonoBehaviour
     [SerializeField] float health;
     [SerializeField] float weaponDamage;
     bool withinRadius;
+    PlayerController playerController;
 
+    private void Awake()
+    {
+        playerController = FindObjectOfType<PlayerController>();
+    }
     public void takeDamage(float amount)
     {
         if (withinRadius)
