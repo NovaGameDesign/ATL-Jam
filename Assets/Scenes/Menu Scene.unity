@@ -1818,6 +1818,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 880198012}
   m_CullTransparentMesh: 1
+--- !u!1 &892887908
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 892887910}
+  - component: {fileID: 892887909}
+  m_Layer: 0
+  m_Name: GSC
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &892887909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 892887908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 942c0bd80fcae76488e45078c3df9005, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WinPanel: {fileID: 0}
+--- !u!4 &892887910
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 892887908}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 575, y: 264.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &969759858
 GameObject:
   m_ObjectHideFlags: 0
@@ -3708,7 +3753,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1628068646}
+      - m_Target: {fileID: 892887909}
         m_TargetAssemblyTypeName: GameStateController, Assembly-CSharp
         m_MethodName: CloseGame
         m_Mode: 1
@@ -4256,7 +4301,6 @@ GameObject:
   - component: {fileID: 1628068642}
   - component: {fileID: 1628068641}
   - component: {fileID: 1628068645}
-  - component: {fileID: 1628068646}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -4372,19 +4416,6 @@ MonoBehaviour:
   levelsPanel: {fileID: 2039072326}
   title: {fileID: 1393200839}
   levelDecider: 0
---- !u!114 &1628068646
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1628068640}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 942c0bd80fcae76488e45078c3df9005, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  WinPanel: {fileID: 0}
 --- !u!1 &1736006667
 GameObject:
   m_ObjectHideFlags: 0
@@ -5542,3 +5573,4 @@ SceneRoots:
   - {fileID: 533966108}
   - {fileID: 1628068644}
   - {fileID: 434313667}
+  - {fileID: 892887910}
