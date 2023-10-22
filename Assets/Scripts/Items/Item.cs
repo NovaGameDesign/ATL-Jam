@@ -21,6 +21,8 @@ public abstract class Item : MonoBehaviour
     [SerializeField] string hoverText;
     [SerializeField] itemType Type;
     [SerializeField] string itemName;
+    public int itemQuantity;
+    public bool shouldReduceQuantity;
 
     public GameObject hoverTextUI;
 
@@ -62,14 +64,29 @@ public abstract class Item : MonoBehaviour
             {
                 if(player.Items.Count < 6)
                 {
+                    bool alreadyAdded = false;
+                    foreach(GameObject obj in player.Items)
+                    {
+                        var reference = obj.GetComponent<Item>();
+                       if (itemName == reference.itemName)
+                        {
+                            reference.itemQuantity += itemQuantity;
+                            Debug.Log("Increased the quantity of the held item, we now have: " + reference.itemQuantity);
+                            alreadyAdded = true;
+                            break;
+                        }
+                    }
                     Destroy(hoverTextUI);
                     gameObject.GetComponent<BoxCollider>().enabled = false;
 
                     gameObject.transform.SetParent(player.leftAttachPoint);
                     gameObject.transform.position = player.leftAttachPoint.position;
                     gameObject.transform.rotation = player.transform.rotation;
-                    
-                    player.Items.Add(gameObject);                    
+
+                    if (!alreadyAdded)
+                    {
+                        player.Items.Add(gameObject);
+                    }
                     this.gameObject.SetActive(false);
                     Debug.Log("Added an item the player's inventory");
                 }
