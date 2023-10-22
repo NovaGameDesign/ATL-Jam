@@ -25,11 +25,17 @@ public class UserInterfaceManager : MonoBehaviour
     public int levelIndex;
     private Unity.Mathematics.Random random;
 
+    public Transform centerPoint;
+    public Transform edgePoint;
+    public Transform camera;
+
+    bool spinning = false;
+
     #region Awake Start Update
 
     public void Awake()
     {
-
+        camera.LookAt(centerPoint);
     }
 
     public void Start()
@@ -51,6 +57,18 @@ public class UserInterfaceManager : MonoBehaviour
             {
                 UnPauseMenu();
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            spinning = true;
+        }
+
+
+        if (spinning)
+        {
+            centerPoint.Rotate(0, 1f, 0, Space.Self);
+            camera.LookAt(edgePoint);
         }
     }
 
