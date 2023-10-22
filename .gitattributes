@@ -1,2 +1,6 @@
 *.asset filter=lfs diff=lfs merge=lfs -text
 *.png filter=lfs diff=lfs merge=lfs -text
+<<<<<<< HEAD
+=======
+*.hdr filter=lfs diff=lfs merge=lfs -text
+>>>>>>> Air-2
