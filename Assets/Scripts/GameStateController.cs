@@ -110,14 +110,16 @@ public class GameStateController : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
 
-            Debug.Log("Cusor.lockState = " + Cursor.lockState.ToString());
-            Debug.Log("Cusor.visibility = " + Cursor.visible.ToString());
+            //Debug.Log("Cusor.lockState = " + Cursor.lockState.ToString());
+            //Debug.Log("Cusor.visibility = " + Cursor.visible.ToString());
         }
         else
         {
-            Debug.Log("Cusor Already Enabled");
-            Debug.Log("Cusor.lockState = " + Cursor.lockState.ToString());
-            Debug.Log("Cusor.visibility = " + Cursor.visible.ToString());
+            // Do nothing
+
+            //Debug.Log("Cusor Already Enabled");
+            //Debug.Log("Cusor.lockState = " + Cursor.lockState.ToString());
+            //Debug.Log("Cusor.visibility = " + Cursor.visible.ToString());
         }
     }
     /// <summary>
@@ -131,14 +133,16 @@ public class GameStateController : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
 
-            Debug.Log("Cusor.lockState = " + Cursor.lockState.ToString());
-            Debug.Log("Cusor.visibility = " + Cursor.visible.ToString());
+            //Debug.Log("Cusor.lockState = " + Cursor.lockState.ToString());
+            //Debug.Log("Cusor.visibility = " + Cursor.visible.ToString());
         }
         else
         {
-            Debug.Log("Cusor Already Disabled");
-            Debug.Log("Cusor.lockState = " + Cursor.lockState.ToString());
-            Debug.Log("Cusor.visibility = " + Cursor.visible.ToString());
+            // Do nothing
+
+            //Debug.Log("Cusor Already Disabled");
+            //Debug.Log("Cusor.lockState = " + Cursor.lockState.ToString());
+            //Debug.Log("Cusor.visibility = " + Cursor.visible.ToString());
         }
     }
 

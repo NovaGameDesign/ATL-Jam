@@ -40,6 +40,7 @@ public class UserInterfaceManager : MonoBehaviour
     public void Awake()
     {
         camera.LookAt(centerPoint);
+        completedLevelIndexes = new List<int>();
     }
 
     public void Start()
@@ -94,7 +95,7 @@ public class UserInterfaceManager : MonoBehaviour
             {
                 levelIndex = 4;
             }
-        } while (!completedLevelIndexes.Contains(levelIndex));
+        } while (completedLevelIndexes.Contains(levelIndex));
 
 
         
