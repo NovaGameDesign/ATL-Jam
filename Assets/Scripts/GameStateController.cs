@@ -37,6 +37,7 @@ public class GameStateController : MonoBehaviour
         Debug.Log("GSC | Awake()");
 
         UIM = FindObjectOfType<UserInterfaceManager>();
+        PHM = FindObjectOfType<PlayerHealthManager>();
 
         // Reset Win Conditions to New Game
         airWin = false;
@@ -59,6 +60,10 @@ public class GameStateController : MonoBehaviour
             Debug.Log("GSC | Current Scene = " + SceneManager.GetActiveScene().name);
         }
     }
+
+   
+
+
 
     //void Start()
     //{
@@ -85,9 +90,16 @@ public class GameStateController : MonoBehaviour
         {
             CursorDisabled();
 
+            //UIM.gamePanel == true, all other panels are off
+            //UIM.gamepanel.healthui updating health and score
             if (UIM.victoryPanel.activeSelf == false)
             {
-                // do nothing
+                
+                
+            }
+            else
+            {
+                StartCoroutine(completeLevel());
             }
         }
         else
@@ -97,6 +109,16 @@ public class GameStateController : MonoBehaviour
         }
     }
     #endregion
+
+    IEnumerator completeLevel()
+    {
+        int sceneIndex = SceneManager.GetActiveScene().buildIndex;
+        setVictoryPrefs(sceneIndex);
+
+        yield return new WaitForSeconds(3f);
+
+        LoadMainMenu();
+    }
 
     #region Mouse State Control
     /// <summary>
@@ -195,7 +217,7 @@ public class GameStateController : MonoBehaviour
         if (Input.GetKey(KeyCode.End))
         {
             // Set Player Health to Zero
-            PHM = FindObjectOfType<PlayerHealthManager>();
+            
             PHM.TakeHit();
             Debug.Log("GSC | PHM._healthPoints = " + PHM.GetHealthPoints());
         }
@@ -246,6 +268,31 @@ public class GameStateController : MonoBehaviour
             default:
                 // Check winType
                 Debug.Log("Win Type = " + wT);
+                break;
+        }
+    }
+
+    public void setVictoryPrefs(int currentScene)
+    {
+        switch (currentScene)
+        {
+            case 2:
+                // Air Win
+                PlayerPrefs.SetInt("AirWin", 1);
+                break;
+            case 3:
+                // Earth Win
+                PlayerPrefs.SetInt("EathWin", 1);
+                break;
+            case 4:
+                // Fire Win
+                PlayerPrefs.SetInt("FireWIn", 1);
+                break;
+            case 5:
+                // Water Win
+                PlayerPrefs.SetInt("WaterWin", 1);
+                break;
+            default:
                 break;
         }
     }

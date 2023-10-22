@@ -40,17 +40,43 @@ public class UserInterfaceManager : MonoBehaviour
     public void Awake()
     {
         camera.LookAt(centerPoint);
-        completedLevelIndexes = new List<int>();
+        //completedLevelIndexes = new List<int>();
+
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            PlayerPrefs.SetInt("AirWin", 0);
+            PlayerPrefs.SetInt("EarthWin", 0);
+            PlayerPrefs.SetInt("FireWin", 0);
+            PlayerPrefs.SetInt("WaterWin", 0);
+        }
     }
 
     public void Start()
     {
-
+        
     }
 
     // Update is called once per frame
     public void Update()
     {
+        if(PlayerPrefs.GetInt("AirWin") == 1 && !completedLevelIndexes.Contains(2))
+        {
+            completedLevelIndexes.Add(2);
+        }
+        if (PlayerPrefs.GetInt("EarthWin") == 1 && !completedLevelIndexes.Contains(3))
+        {
+            completedLevelIndexes.Add(3);
+        }
+        if (PlayerPrefs.GetInt("FireWin") == 1 && !completedLevelIndexes.Contains(4))
+        {
+            completedLevelIndexes.Add(4);
+        }
+        if (PlayerPrefs.GetInt("WaterWin") == 1 && !completedLevelIndexes.Contains(5))
+        {
+            completedLevelIndexes.Add(5);
+        }
+
+
         if (SceneManager.GetActiveScene().name != "Menu Scene")
         {
             if ((Input.GetKeyDown(KeyCode.Escape)) && (pausePanel.activeSelf == false))
@@ -87,13 +113,13 @@ public class UserInterfaceManager : MonoBehaviour
         do
         {
             levelIndex = UnityEngine.Random.Range(2, 6);
-            if (levelIndex < 0)
+            if (levelIndex < 2)
             {
-                levelIndex = 0;
+                levelIndex = 2;
             }
-            if (levelIndex > 4)
+            if (levelIndex > 5)
             {
-                levelIndex = 4;
+                levelIndex = 5;
             }
         } while (completedLevelIndexes.Contains(levelIndex));
 
