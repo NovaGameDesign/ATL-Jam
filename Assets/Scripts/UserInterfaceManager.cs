@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 
 /// <summary>
 /// User Interface Manager
@@ -21,6 +23,8 @@ public class UserInterfaceManager : MonoBehaviour
 {
     public GameObject startPanel, pausePanel, instructionsPanel,
         optionsPanel, creditsPanel, quitPanel, levelsPanel, gamePanel, victoryPanel;
+
+    public TMP_Text healthText, scoreText;
 
     public int levelIndex;
     private Unity.Mathematics.Random random;
@@ -167,6 +171,25 @@ public class UserInterfaceManager : MonoBehaviour
         Debug.Log("Back Button clicked - Returned to MainMenu");
     }
     #endregion
+
+
+    #region GameUI
+
+    public void setHealthText(string text)
+    {
+        healthText.text = text;
+
+
+        
+    }
+
+    public void setScoreText(string text)
+    {
+        scoreText.text = text;
+    }
+
+    #endregion
+
 
     #region Pause
     // Pause Game and Open Pause Menu

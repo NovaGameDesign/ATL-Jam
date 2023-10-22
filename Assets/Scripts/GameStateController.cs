@@ -94,12 +94,15 @@ public class GameStateController : MonoBehaviour
             //UIM.gamepanel.healthui updating health and score
             if (UIM.victoryPanel.activeSelf == false)
             {
-                
-                
+                UIM.gamePanel.SetActive(true);
+
+                UIM.setHealthText("Health: " + PHM.GetHealthPoints() + " / " + PHM.startingHealth);
+                UIM.setScoreText("Score: " + currentScore  + " / " + totalScore);
             }
             else
             {
-                StartCoroutine(completeLevel());
+                int sceneIndex = SceneManager.GetActiveScene().buildIndex;
+                setVictoryPrefs(sceneIndex);
             }
         }
         else
@@ -110,13 +113,8 @@ public class GameStateController : MonoBehaviour
     }
     #endregion
 
-    IEnumerator completeLevel()
+    public void completeLevel()
     {
-        int sceneIndex = SceneManager.GetActiveScene().buildIndex;
-        setVictoryPrefs(sceneIndex);
-
-        yield return new WaitForSeconds(3f);
-
         LoadMainMenu();
     }
 
