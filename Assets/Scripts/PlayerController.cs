@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour
     Transform groundHit;
     bool glide;
     bool isSprint;
+    bool attacking;
+    [HideInInspector]public bool isDead = false;
 
 
     //Input Related
@@ -38,6 +40,7 @@ public class PlayerController : MonoBehaviour
         sprint.canceled += EnableSprint;
         
         isSprint = false;
+        attacking = false;
 
     }
 
@@ -45,12 +48,16 @@ public class PlayerController : MonoBehaviour
     {
        
         grounded = GroundCheck();
-        Debug.Log("The player is: " + grounded);
         //get and use player movement
         if (!glide)
         {
-            move = playerInput.actions["Movement"].ReadValue<Vector2>() * movementSpeedModifier;
-            transform.Translate(move.x * Time.deltaTime, 0, move.y * Time.deltaTime);
+
+            if (!isDead)
+            {
+                move = playerInput.actions["Movement"].ReadValue<Vector2>() * movementSpeedModifier;
+                transform.Translate(move.x * Time.deltaTime, 0, move.y * Time.deltaTime);
+            }
+            
         }
 
 
@@ -68,7 +75,6 @@ public class PlayerController : MonoBehaviour
 
         if (playerInput.actions["Attack"].triggered)
         {
-            print("started atacj");
             StartCoroutine(AttackSequence());
             //animator.Play("slash");
         }
@@ -137,9 +143,11 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator AttackSequence()
     {
+        attacking = true;
         animator.SetBool("Attack", true);
         yield return new WaitForSeconds(1.5f);
         animator.SetBool("Attack", false);
+        attacking = false;
         
     }
 
@@ -159,5 +167,11 @@ public class PlayerController : MonoBehaviour
 
         return Physics.Raycast(transform.position, -transform.up, .1f);
        
+    }
+
+    public bool getAttacking()
+    {
+        print("called get attack");
+        return attacking;
     }
 }
