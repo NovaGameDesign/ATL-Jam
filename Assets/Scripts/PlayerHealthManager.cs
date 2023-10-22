@@ -9,7 +9,13 @@ public class PlayerHealthManager : MonoBehaviour
     public float startingHealth = 100;
     private float _healthpoints;
     PlayerController playerController;
+    public float rockDamageCooldown = 2;
+    float rockDamageTImer;
 
+    private void Update()
+    {
+        rockDamageTImer += Time.deltaTime;
+    }
 
     private void Awake()
     {
@@ -51,6 +57,12 @@ public class PlayerHealthManager : MonoBehaviour
         {
             TakeHit();
             Destroy(other.gameObject);
+        }
+
+        if (other.gameObject.tag.Equals("Rock") && rockDamageTImer >= rockDamageCooldown)
+        {
+            TakeHit();
+            rockDamageTImer = 0;
         }
     }
 }
