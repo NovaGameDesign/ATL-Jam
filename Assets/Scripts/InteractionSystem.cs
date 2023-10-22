@@ -15,6 +15,7 @@ public class InteractionSystem : MonoBehaviour
     [Header("Inventory")]
     public List<GameObject> Items = new List<GameObject>();
     private int activeItem;
+    private int priorItem;
     private GameObject outItem;
     public Transform leftAttachPoint;
 
@@ -29,27 +30,23 @@ public class InteractionSystem : MonoBehaviour
         scroll.performed += scrollQuickItems;
     }
 
-    private void Update()
-    {
-        if(playerIsInteracting)
-        {
-           // if(Physics.SphereCast(transform.position, 4, ))
-        }
-    }
-
     private void scrollQuickItems(InputAction.CallbackContext context)
     {
         int scrollValue = (int)Mathf.Clamp(scroll.ReadValue<Vector2>().y, -1, 1);
-        
+
+        priorItem = activeItem;
         activeItem += scrollValue;
         if(activeItem > Items.Count)
         {
+            priorItem = activeItem;
             activeItem = Items.Count-1;
         }
         else if (activeItem < 0)
         {
             activeItem = 0;
         }
+
+        Items[priorItem].SetActive(false);
         Items[activeItem].SetActive(true);
         //outItem = Instantiate(Items[activeItem]);
         Debug.Log("The current scroll value is: " + activeItem);
@@ -59,6 +56,16 @@ public class InteractionSystem : MonoBehaviour
     {
         var currentItem = Items[activeItem].GetComponent<Item>();
         currentItem.Useitem();
+        if(currentItem.shouldReduceQuantity)
+        {
+            currentItem.itemQuantity--;
+            if (currentItem.itemQuantity == 0)
+            {
+                Items[activeItem].SetActive(false);
+                Items.RemoveAt(activeItem);
+
+            }
+        }        
     }
 
     private void Interact(InputAction.CallbackContext context)

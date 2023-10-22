@@ -285,6 +285,9 @@ MonoBehaviour:
   playerInput: {fileID: 8778492875848058547}
   rb: {fileID: 2315901918634277808}
   animator: {fileID: 5284055111956609158}
+  lMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!95 &5284055111956609158
 Animator:
   serializedVersion: 5
@@ -1865,7 +1868,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0

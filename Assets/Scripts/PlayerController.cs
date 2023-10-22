@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour
     //Input Related
     private InputAction sprint;
 
+    [SerializeField] LayerMask lMask;
+
     private void Awake()
     {
         //Cursor.lockState = CursorLockMode.Locked;
@@ -165,7 +167,7 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        return Physics.Raycast(transform.position, -transform.up, .1f);
+        return Physics.Raycast(transform.position, -transform.up, .1f, lMask);
        
     }
 
