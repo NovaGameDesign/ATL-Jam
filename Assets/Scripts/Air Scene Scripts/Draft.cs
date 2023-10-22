@@ -10,14 +10,11 @@ public class Draft : MonoBehaviour
     [SerializeField] float draftDist;
     [Header("Draft Collider")]
     [SerializeField] Collider collider;
-    [SerializeField] LayerMask layerToHit;
 
     [Header("Player Components")]
     [SerializeField] PlayerController playerController;
     [SerializeField] GameObject player;
     [SerializeField] Rigidbody rb_player;
-
-
 
     RaycastHit hit;
     // Start is called before the first frame update
@@ -29,7 +26,7 @@ public class Draft : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Physics.BoxCast(collider.bounds.center, transform.lossyScale/ 2, transform.up, out hit, transform.rotation, draftDist, layerToHit))
+        if (Physics.BoxCast(collider.bounds.center, transform.lossyScale/ 2, transform.up, out hit, transform.rotation, draftDist))
         {
             if (hit.collider.gameObject == player)
             {
