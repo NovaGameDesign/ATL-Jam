@@ -21,7 +21,7 @@ public class LashAbility : Item
             if (Physics.SphereCast(raycastStart.position, castRadius, raycastStart.forward, out hit, maxDistance, layerToHit))
             {
                 var lashPoint = hit.collider?.GetComponent<LashPoint>(); // Checks if the thing we hit is a lash point or not. 
-                lashPoint?.movePoint();
+                lashPoint?.activatePoint();
             }
         }
    
