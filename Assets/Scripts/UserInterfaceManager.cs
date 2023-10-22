@@ -28,6 +28,7 @@ public class UserInterfaceManager : MonoBehaviour
     public Transform centerPoint;
     public Transform edgePoint;
     public Transform camera;
+    public Transform cameraRotatePoint;
 
     bool spinning = false;
 
@@ -67,6 +68,7 @@ public class UserInterfaceManager : MonoBehaviour
 
         if (spinning)
         {
+            camera.position = cameraRotatePoint.position;
             centerPoint.Rotate(0, 1f, 0, Space.Self);
             camera.LookAt(edgePoint);
         }
