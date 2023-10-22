@@ -24,6 +24,8 @@ public class PlayerController : MonoBehaviour
     bool glide;
     bool isSprint;
     bool attacking;
+    GameStateController gsc;
+
     [HideInInspector]public bool isDead = false;
 
 
@@ -34,6 +36,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        gsc = GameObject.Find("GSC").GetComponent<GameStateController>();
         //Cursor.lockState = CursorLockMode.Locked;
         //Cursor.visible = false;
 
@@ -175,5 +178,13 @@ public class PlayerController : MonoBehaviour
     {
         print("called get attack");
         return attacking;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag.Equals("Trophy"))
+        {
+            gsc.currentScore = 1;
+        }
     }
 }
