@@ -20,6 +20,9 @@ public class KillFloor : MonoBehaviour
         {
             gameObject.transform.position = spawnPoint.transform.position;
             gameObject.transform.rotation = spawnPoint.transform.rotation;
+            Rigidbody rb = gameObject.GetComponent<Rigidbody>();
+            rb.isKinematic = true;
+            rb.isKinematic = false;
         }
         
     }
