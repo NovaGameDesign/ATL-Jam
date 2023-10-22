@@ -158,45 +158,45 @@ public class GameStateController : MonoBehaviour
     public void LoadLevel()
     {
         Debug.Log("GSC | LoadLevel()");
-        Debug.Log("GSC | UIM.levelDecider = " + UIM.levelDecider);
-        switch (UIM.levelDecider)
+        Debug.Log("GSC | UIM.levelDecider = " + UIM.levelIndex);
+        switch (UIM.levelIndex)
         {
             case 1:
                 // Menu Scene
-                SceneManager.LoadScene(UIM.levelDecider);
+                SceneManager.LoadScene(UIM.levelIndex);
                 break;
             case 2:
                 // Air Scene
-                SceneManager.LoadScene(UIM.levelDecider);
+                SceneManager.LoadScene(UIM.levelIndex);
                 // Enable Cursor Control and Visibility
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
                 break;
             case 3:
                 // Earth Scene
-                SceneManager.LoadScene(UIM.levelDecider);
+                SceneManager.LoadScene(UIM.levelIndex);
                 // Enable Cursor Control and Visibility
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
                 break;
             case 4:
                 // Fire Scene
-                SceneManager.LoadScene(UIM.levelDecider);
+                SceneManager.LoadScene(UIM.levelIndex);
                 // Enable Cursor Control and Visibility
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
                 break;
             case 5:
                 // Water Scene
-                SceneManager.LoadScene(UIM.levelDecider);
+                SceneManager.LoadScene(UIM.levelIndex);
                 // Enable Cursor Control and Visibility
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
                 break;
             default:
                 // Default Case loads the 'Test Scene'
-                UIM.levelDecider = 0;
-                SceneManager.LoadScene(UIM.levelDecider);
+                UIM.levelIndex = 0;
+                SceneManager.LoadScene(UIM.levelIndex);
                 // Enable Cursor Control and Visibility
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
