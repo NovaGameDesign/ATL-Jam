@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -18,8 +19,16 @@ using UnityEngine.SceneManagement;
 public class GameStateController : MonoBehaviour
 {
     private UserInterfaceManager UIM;
+    private PlayerHealthManager PHM;
     //winPanel = UIM.victoryPanel;
 
+    public bool airWin;
+    public bool earthWin;
+    public bool fireWin;
+    public bool waterWin;
+
+    public int score;
+    
     #region Awake Start Update
     // Use this for initialization
     void Awake()
@@ -28,6 +37,14 @@ public class GameStateController : MonoBehaviour
 
         UIM = FindObjectOfType<UserInterfaceManager>();
 
+        // Reset Win Conditions to New Game
+        airWin = false;
+        earthWin = false;
+        fireWin = false;
+        waterWin = false;
+        // Reset Score to New Game
+        score = 0;
+        
         Debug.Log("GSC | Current Scene = " + SceneManager.GetActiveScene().name);
         // Starts Game at Main Menu
         if (SceneManager.GetActiveScene().name != "Menu Scene")
@@ -146,14 +163,19 @@ public class GameStateController : MonoBehaviour
         if (Input.GetKey(KeyCode.PageUp))
         {
             // Increment Score by 1
+            score++;
         }
         if (Input.GetKey(KeyCode.PageDown))
         {
             // Decrement Score by 1
+            score--;
         }
         if (Input.GetKey(KeyCode.End))
         {
             // Set Player Health to Zero
+            PHM = FindObjectOfType<PlayerHealthManager>();
+            PHM.TakeHit();
+            Debug.Log("GSC | PHM._healthPoints = " + PHM.GetHealthPoints());
         }
     }
     #endregion
@@ -184,20 +206,20 @@ public class GameStateController : MonoBehaviour
         switch (wT)
         {
             case 1:
-                // Blue Conquer
-                //UIM.BlueConquer();
+                // Air Win
+                airWin = true;
                 break;
             case 2:
-                // Red Conquer
-                //UIM.RedConquer();
+                // Earth Win
+                earthWin = true;
                 break;
             case 3:
-                // Blue Conquest
-                //UIM.BlueConquest();
+                // Fire Win
+                fireWin = true;
                 break;
             case 4:
-                // Red Conquest
-                //UIM.RedConquest();
+                // Water Win
+                waterWin = true;
                 break;
             default:
                 // Check winType
