@@ -12,6 +12,8 @@ public class LashAbility : Item
     RaycastHit hit;
     public LayerMask layerToHit;
     public Transform raycastStart;
+   
+    [SerializeField] AudioSource sfx;
 
     private void Update()
     { 
@@ -29,7 +31,8 @@ public class LashAbility : Item
     public override void Useitem()
     {        
         shouldCast = true;
-        StartCoroutine(waitFor(.25f));        
+        StartCoroutine(waitFor(.25f));
+        sfx.Play();
     }
     IEnumerator waitFor(float waitTime = 1)
     {

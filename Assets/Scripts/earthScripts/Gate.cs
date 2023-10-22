@@ -35,6 +35,8 @@ public class Gate : MonoBehaviour
         leftGate.transform.localScale = leftGateNew.localScale;
         rightGate.transform.rotation = rightGateNew.rotation;
         rightGate.transform.localScale = rightGateNew.localScale;
+
+        textCanvas.SetActive(false);
     }
 
     public void ActivateRune()

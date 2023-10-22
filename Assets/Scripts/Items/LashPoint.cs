@@ -15,6 +15,7 @@ public class LashPoint : MonoBehaviour
 
     [SerializeField] GameObject[] particles;
     [SerializeField] Gate gate;
+    [SerializeField] AudioSource sfx;
 
     private void Update()
     {
@@ -41,6 +42,7 @@ public class LashPoint : MonoBehaviour
                 }
                 gate.ActivateRune();
                 runeActivated = true;
+                sfx.Play();
             }
             
         }

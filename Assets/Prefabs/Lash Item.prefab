@@ -36,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.007, y: 1.141}
+  m_AnchoredPosition: {x: -0.007, y: 0.681}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &260105876207056871
@@ -114,6 +114,7 @@ GameObject:
   - component: {fileID: 6394957068017272188}
   - component: {fileID: 662469210694257631}
   - component: {fileID: 1806045621541505623}
+  - component: {fileID: 8608472483388418985}
   m_Layer: 0
   m_Name: Lash Item
   m_TagString: Untagged
@@ -157,7 +158,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 0.23
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &662469210694257631
 BoxCollider:
@@ -195,6 +196,8 @@ MonoBehaviour:
   hoverText: 
   Type: 1
   itemName: 
+  itemQuantity: 0
+  shouldReduceQuantity: 0
   hoverTextUI: {fileID: 2833643462900216094}
   castRadius: 1
   maxDistance: 25
@@ -202,6 +205,103 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   raycastStart: {fileID: 0}
+  sfx: {fileID: 8608472483388418985}
+--- !u!82 &8608472483388418985
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2474276709257748881}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: a8746de2acb2eb6438ce35c5b394bd37, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &2833643462900216094
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,6 +313,7 @@ GameObject:
   - component: {fileID: 575258155673421780}
   - component: {fileID: 1737995991824062137}
   - component: {fileID: 3119227602701892448}
+  - component: {fileID: 3721602942841870542}
   m_Layer: 5
   m_Name: Hover Text
   m_TagString: Untagged
@@ -227,16 +328,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2833643462900216094}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.000002861023}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2884743222091841225}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -67.4, y: 0}
+  m_AnchoredPosition: {x: -67.5, y: 0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1737995991824062137
@@ -336,6 +437,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &3721602942841870542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2833643462900216094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2d821fd7acd4aa439c44484210c7081, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCam: {fileID: 0}
 --- !u!1001 &7247037432542428369
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -347,17 +461,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 4235cbdf8e47c554e836337c5766356f,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 5
+      value: 1.9943
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4235cbdf8e47c554e836337c5766356f,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 5
+      value: 1.9943
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4235cbdf8e47c554e836337c5766356f,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 5
+      value: 1.9943
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4235cbdf8e47c554e836337c5766356f,
         type: 3}
@@ -367,7 +481,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 4235cbdf8e47c554e836337c5766356f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.506
+      value: -0.204
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4235cbdf8e47c554e836337c5766356f,
         type: 3}
