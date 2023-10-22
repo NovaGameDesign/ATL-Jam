@@ -41,16 +41,16 @@ public abstract class Item : MonoBehaviour
     }
     public abstract void Useitem();
 
-    private void OnTriggerEnter(Collider collision)
+    private void OnTriggerEnter(Collider collision)//Shows The UI that says "Press E to interact
     {
         collision.gameObject?.GetComponent<InteractionSystem>();
-        hoverTextUI.SetActive(true);
+        hoverTextUI?.SetActive(true);
     }
 
-    private void OnTriggerExit(Collider collision)
+    private void OnTriggerExit(Collider collision) //Hides The UI that says "Press E to interact
     {
         collision.gameObject?.GetComponent<InteractionSystem>();
-        hoverTextUI.SetActive(false);
+        hoverTextUI?.SetActive(false);
     }
 
     private void OnTriggerStay(Collider collision)
@@ -65,6 +65,7 @@ public abstract class Item : MonoBehaviour
                     Destroy(hoverTextUI);
                     gameObject.transform.SetParent(player.leftAttachPoint);
                     gameObject.transform.position = player.leftAttachPoint.position;
+                    gameObject.transform.rotation = player.transform.rotation;
 
                     player.Items.Add(gameObject);                    
                     this.gameObject.SetActive(false);

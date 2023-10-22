@@ -29,6 +29,14 @@ public class InteractionSystem : MonoBehaviour
         scroll.performed += scrollQuickItems;
     }
 
+    private void Update()
+    {
+        if(playerIsInteracting)
+        {
+           // if(Physics.SphereCast(transform.position, 4, ))
+        }
+    }
+
     private void scrollQuickItems(InputAction.CallbackContext context)
     {
         int scrollValue = (int)Mathf.Clamp(scroll.ReadValue<Vector2>().y, -1, 1);
