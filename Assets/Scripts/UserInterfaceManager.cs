@@ -18,18 +18,21 @@ using UnityEngine.SceneManagement;
 public class UserInterfaceManager : MonoBehaviour
 {
     public GameObject startPanel, pausePanel, instructionsPanel,
-        optionsPanel, creditsPanel, quitPanel, levelsPanel;
+        optionsPanel, creditsPanel, quitPanel, levelsPanel, inGamePanel;
 
     public GameObject title;
     public int levelIndex;
 
-    //public GameObject FadePanel;
-    //public FadeTransition fade;
+    #region Awake Start Update
 
     public void Awake()
     {
-        //FadePanel = GameObject.Find("FadePanel");
-        //FadeTransition fade = FadePanel.GetComponent<FadeTransition>();
+        
+    }
+
+    public void Start()
+    {
+        
     }
 
     // Update is called once per frame
@@ -50,6 +53,8 @@ public class UserInterfaceManager : MonoBehaviour
         TestScores();
 
     }
+
+    #endregion
 
     #region MainMenu
 
@@ -91,10 +96,10 @@ public class UserInterfaceManager : MonoBehaviour
         if (pausePanel.activeSelf == false)
         {
             pausePanel.SetActive(true);
-
+            inGamePanel.SetActive(false);
             Time.timeScale = 0.0f;
         }
-        Debug.Log("GAMEMANAGER:: TimeScale: " + Time.timeScale);
+        Debug.Log("UIM | TimeScale = " + Time.timeScale);
     }
 
     // Resume Game and Close Pause Menu
@@ -103,10 +108,10 @@ public class UserInterfaceManager : MonoBehaviour
         if (pausePanel.activeSelf == true)
         {
             pausePanel.SetActive(false);
-
+            inGamePanel.SetActive(true);
             Time.timeScale = 1.0f;
         }
-        Debug.Log("GAMEMANAGER:: TimeScale: " + Time.timeScale);
+        Debug.Log("UIM | TimeScale = " + Time.timeScale);
     }
 
     #endregion
@@ -196,6 +201,9 @@ public class UserInterfaceManager : MonoBehaviour
         Debug.Log("GAMEMANAGER:: TimeScale: " + Time.timeScale);
     }
 
+    #endregion
+
+    #region Credits
     // This function can be used to view the Credits
     // It will show in MainMenu and after the Results page
     public void ViewCredits()
@@ -212,7 +220,6 @@ public class UserInterfaceManager : MonoBehaviour
         }
 
     }
-
     #endregion
 
     #region Quit
