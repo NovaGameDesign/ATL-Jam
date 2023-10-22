@@ -8,40 +8,42 @@ public class EnemyHealthManager : MonoBehaviour
     [SerializeField] float weaponDamage;
     bool withinRadius;
     PlayerController playerController;
+    [SerializeField] float damageCooldown = 1.5f;
+    float currentTime = 0;
 
     private void Awake()
     {
         playerController = FindObjectOfType<PlayerController>();
+
     }
-    public void takeDamage(float amount)
-    {
-        if (withinRadius)
-        {
-            health -= amount;
-        }   
-    }
+
 
     private void Update()
     {
+        currentTime += Time.deltaTime;
+
         if (health <= 0)
         {
             //run animation
 
             //destroy this enemy
             Destroy(this.gameObject);
+
+            
         }
+        bool playerAttacking = playerController.getAttacking();
+        if (withinRadius && playerAttacking && currentTime >= damageCooldown)
+            StartCoroutine(takeDamage());
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag.Equals("Attack Radius"))
         {
+            print("within radius");
             withinRadius = true;
         }
-        if (other.tag.Equals("Sword"))
-        {
-            takeDamage(weaponDamage);
-        }
+
     }
 
     private void OnTriggerExit(Collider other)
@@ -50,5 +52,14 @@ public class EnemyHealthManager : MonoBehaviour
         {
             withinRadius = false; ;
         }
+    }
+
+    IEnumerator takeDamage()
+    {
+        currentTime = 0;
+        print("took " + weaponDamage + " damage");
+        yield return new WaitForSeconds(damageCooldown);
+        health -= weaponDamage;
+        
     }
 }

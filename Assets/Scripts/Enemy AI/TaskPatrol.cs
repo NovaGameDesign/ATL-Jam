@@ -35,20 +35,23 @@ public class TaskPatrol : Node
         }
         else
         {
-            Transform wp = _waypoints[_currentWaypointIndex];
-            if (Vector3.Distance(_transform.position, wp.position) < 0.01f)
+           if(_waypoints.Length > 0)
             {
-                _transform.position = wp.position;
-                _waitCounter = 0f;
-                _waiting = true;
+                Transform wp = _waypoints[_currentWaypointIndex];
+                if (Vector3.Distance(_transform.position, wp.position) < 0.01f)
+                {
+                    _transform.position = wp.position;
+                    _waitCounter = 0f;
+                    _waiting = true;
 
-                _currentWaypointIndex = (_currentWaypointIndex + 1) % _waypoints.Length;
-                //_animator.SetBool("Walking", false);
-            }
-            else
-            {
-                _transform.position = Vector3.MoveTowards(_transform.position, wp.position, EnemyBT.speed * Time.deltaTime);
-                _transform.LookAt(wp.position);
+                    _currentWaypointIndex = (_currentWaypointIndex + 1) % _waypoints.Length;
+                    //_animator.SetBool("Walking", false);
+                }
+                else
+                {
+                    _transform.position = Vector3.MoveTowards(_transform.position, wp.position, EnemyBT.speed * Time.deltaTime);
+                    _transform.LookAt(wp.position);
+                }
             }
         }
 
