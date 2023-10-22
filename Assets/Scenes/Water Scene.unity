@@ -684,6 +684,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3d421a3a78b196488c547e8888f4dc0, type: 3}
+--- !u!1 &78546984 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5749735772607787726, guid: f3d421a3a78b196488c547e8888f4dc0,
+    type: 3}
+  m_PrefabInstance: {fileID: 78546983}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &84745811
 GameObject:
   m_ObjectHideFlags: 0
@@ -696,6 +702,7 @@ GameObject:
   - component: {fileID: 84745814}
   - component: {fileID: 84745813}
   - component: {fileID: 84745812}
+  - component: {fileID: 84745816}
   m_Layer: 0
   m_Name: Portal Back To Spin
   m_TagString: Untagged
@@ -789,6 +796,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &84745816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 84745811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c0edcff7fb84d2439fcb39cdb0e068f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1795427035}
+  trophy: {fileID: 78546984}
 --- !u!1 &88232675
 GameObject:
   m_ObjectHideFlags: 0
