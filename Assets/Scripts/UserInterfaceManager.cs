@@ -24,7 +24,7 @@ public class UserInterfaceManager : MonoBehaviour
     public GameObject startPanel, pausePanel, instructionsPanel,
         optionsPanel, creditsPanel, quitPanel, levelsPanel, gamePanel, victoryPanel;
 
-    public TMP_Text healthText, scoreText;
+    public TMP_Text healthText, scoreText, victoryText;
 
     public int levelIndex;
     private Unity.Mathematics.Random random;
@@ -108,11 +108,12 @@ public class UserInterfaceManager : MonoBehaviour
         }
     }
 
+    #endregion
+
     IEnumerator selectWorld()
     {
         spinning = true;
         yield return new WaitForSeconds(spinTime);
-
 
         do
         {
@@ -127,19 +128,13 @@ public class UserInterfaceManager : MonoBehaviour
             }
         } while (completedLevelIndexes.Contains(levelIndex));
 
-
-        
         Debug.Log("UIM | levelDecide = " + levelIndex);
         spinning = false;
-        camera.LookAt(worldWaypoints[levelIndex-2]);
+        camera.LookAt(worldWaypoints[levelIndex - 2]);
         yield return new WaitForSeconds(5f);
 
-        
         FindObjectOfType<GameStateController>().LoadLevel();
-
     }
-
-    #endregion
 
     #region MainMenu
 
@@ -173,21 +168,29 @@ public class UserInterfaceManager : MonoBehaviour
 
     public void BackToMainMenuFromLevel()
     {
-        SceneManager.LoadScene("Menu Scene");
+        Level1();
+        startPanel.SetActive(false);
+        levelsPanel.SetActive(true);
 
         Debug.Log("UIM - BackToMainMenuFromLevel");
     }
     #endregion
 
-
     #region GameUI
+
+    public void EnableGameUI()
+    {
+        gamePanel.SetActive(true);
+    }
+
+    public void DisableGameUI()
+    {
+        gamePanel.SetActive(true);
+    }
 
     public void setHealthText(string text)
     {
         healthText.text = text;
-
-
-        
     }
 
     public void setScoreText(string text)
@@ -197,6 +200,24 @@ public class UserInterfaceManager : MonoBehaviour
 
     #endregion
 
+    #region Victory
+
+    public void EnableVictoryUI()
+    {
+        victoryPanel.SetActive(true);
+    }
+
+    public void DisableVictoryUI()
+    {
+        victoryPanel.SetActive(true);
+    }
+
+    public void SetVictoryText(string text)
+    {
+        victoryText.text = text;
+    }
+
+    #endregion
 
     #region Pause
     // Pause Game and Open Pause Menu

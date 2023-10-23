@@ -65,15 +65,15 @@ public class GameStateController : MonoBehaviour
         }
     }
 
-
-
-
-
     void Start()
     {
         Debug.Log("GSC | Start()");
+        
         currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        
+        Debug.Log("GSC | currentSceneIndex = " + currentSceneIndex);
 
+        Debug.Log("GSC | UIM.levelIndex = " + UIM.levelIndex);
     }
 
     private void FixedUpdate()
@@ -92,29 +92,34 @@ public class GameStateController : MonoBehaviour
             //UIM.gamepanel.healthui updating health and score
             if (GetVictoryBool(SceneManager.GetActiveScene().buildIndex) == false)
             {
-                
-
                 UIM.gamePanel.SetActive(true);
 
                 UIM.setHealthText("Health: " + PHM.GetHealthPoints() + " / " + PHM.startingHealth);
                 UIM.setScoreText("Score: " + currentScore  + " / " + totalScore);
 
-                if(currentScore == 1)
+                if(PHM.GetHealthPoints() >= 0 && currentScore == 1)
                 {
-                    UIM.gamePanel.SetActive(false);
-                    UIM.victoryPanel.SetActive(true);
+                    UIM.DisableGameUI();
+                    UIM.SetVictoryText("Victory");
+                    UIM.EnableVictoryUI();
+                    CursorEnabled();
+                }
+                else if(PHM.GetHealthPoints() <= 0)
+                {
+                    UIM.DisableGameUI();
+                    UIM.SetVictoryText("Lost the Game");
+                    UIM.EnableVictoryUI();
                     CursorEnabled();
                 }
             }
             else
             {
-                int sceneIndex = SceneManager.GetActiveScene().buildIndex;
-                setVictoryPrefs(sceneIndex);
+                setVictoryPrefs(currentSceneIndex);
             }
         }
         else
         {
-            Debug.Log("GSC | Update() - Menu Scene - Check Cursor State");
+            //Debug.Log("GSC | Update() - Menu Scene - Check Cursor State");
             CursorEnabled();
         }
     }
@@ -244,15 +249,15 @@ public class GameStateController : MonoBehaviour
     }
 
     /// <summary>
-    /// Victory(int winType) | Purpose:
+    /// Victory(int sceneIndex) | Purpose:
     /// Switch statement for opening the WinPanel to present
     /// various Victory states of the game in the UserInterfaceManager.
     /// </summary>
-    /// <param name="wT">Interger WinType</param>
-    public void SetVictoryBool(int wT)
+    /// <param name="wT">Interger sceneIndex</param>
+    public void SetVictoryBool(int sceneIndex)
     {
-        Debug.Log("GSC | Victory(" + wT + ")");
-        switch (wT)
+        Debug.Log("GSC | SetVictoryBool(" + sceneIndex + ")");
+        switch (sceneIndex)
         {
             case 1:
                 // Air Win
@@ -272,7 +277,7 @@ public class GameStateController : MonoBehaviour
                 break;
             default:
                 // Check winType
-                Debug.Log("Win Type = " + wT);
+                Debug.Log("Win Type = " + sceneIndex);
                 break;
         }
     }
