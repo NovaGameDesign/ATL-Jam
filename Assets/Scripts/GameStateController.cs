@@ -103,6 +103,7 @@ public class GameStateController : MonoBehaviour
                     UIM.SetVictoryText("Victory");
                     UIM.EnableVictoryUI();
                     CursorEnabled();
+                    setVictoryPrefs(currentSceneIndex);
                 }
                 else if(PHM.GetHealthPoints() <= 0)
                 {

@@ -11,12 +11,7 @@ public class WaterBaseCase : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            //check for if trophy state is playing
-            //if (trophy state == not playing)
-            //{
-                //call fail state  
-            //}
-            //if triphy state is playing do nothing
+            player.GetComponent<PlayerHealthManager>().TakeHit(1000);
         }
     }
 

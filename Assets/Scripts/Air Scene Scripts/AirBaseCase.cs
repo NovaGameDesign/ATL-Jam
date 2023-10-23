@@ -7,11 +7,13 @@ public class AirBaseCase : MonoBehaviour
 {
     [SerializeField] TMP_Text timeText;
     [SerializeField] float timer;
+    [SerializeField] PlayerHealthManager player;
+
     // Start is called before the first frame update
-    void Awake()
-    {
-        timer = 180f;
-    }
+    //void Awake()
+    //{
+    //    timer = 180f;
+    //}
 
     // Update is called once per frame
     void Update()
@@ -38,6 +40,7 @@ public class AirBaseCase : MonoBehaviour
         else
         {
             timeText.text = "0:00";
+            player.TakeHit(1000);
         }
     }
 }

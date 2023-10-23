@@ -33,6 +33,18 @@ public class PlayerHealthManager : MonoBehaviour
         return isDead;
     }
 
+    public bool TakeHit(float amount)
+    {
+        
+        _healthpoints -= amount;
+        bool isDead = _healthpoints <= 0;
+        if (isDead)
+            _Die();
+        else
+            animator.SetTrigger("Flinch");
+        return isDead;
+    }
+
     private void _Die()
     {
         transform.Translate(new Vector3(0, -0.3f, 0));

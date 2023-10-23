@@ -23,7 +23,7 @@ public class EarthLossCondition : MonoBehaviour
             timeRemainingText = totalTime.ToString();
             float min = Mathf.FloorToInt(totalTime / 60);
             float sec = Mathf.FloorToInt(totalTime % 60);
-            timeText.text = string.Format("Time Remaining: {0:00}:{1:00}", min, sec);
+            timeText.text = string.Format("{0:00}:{1:00}", min, sec);
         }        
         else if (totalTime <= 0)
         {
