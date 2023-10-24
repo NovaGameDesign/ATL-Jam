@@ -96,7 +96,7 @@ public class UserInterfaceManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            StartCoroutine(selectWorld());
+            StartCoroutine(SelectWorld());
         }
 
 
@@ -110,7 +110,7 @@ public class UserInterfaceManager : MonoBehaviour
 
     #endregion
 
-    IEnumerator selectWorld()
+    IEnumerator SelectWorld()
     {
         spinning = true;
         yield return new WaitForSeconds(spinTime);
@@ -169,6 +169,7 @@ public class UserInterfaceManager : MonoBehaviour
     public void BackToMainMenuFromLevel()
     {
         Level1();
+        new WaitForSeconds(.5f);
         startPanel.SetActive(false);
         levelsPanel.SetActive(true);
 
@@ -403,7 +404,7 @@ public class UserInterfaceManager : MonoBehaviour
     public void SpinLevels()
     {
         levelsPanel.SetActive(false);
-        StartCoroutine(selectWorld());
+        StartCoroutine(SelectWorld());
     }
 
     /// <summary>

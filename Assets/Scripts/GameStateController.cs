@@ -29,8 +29,9 @@ public class GameStateController : MonoBehaviour
     public bool waterWin;
 
     public int currentScore, totalScore;
-
+    // int currentSceneIndex is exclusively used for GSC
     public int currentSceneIndex;
+    // Use UIM.levelIndex to interact with UIM level state
     
     #region Awake Start Update
     // Use this for initialization
@@ -51,6 +52,7 @@ public class GameStateController : MonoBehaviour
         totalScore = 4;
 
         currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        UIM.levelIndex = currentSceneIndex;
 
         Debug.Log("GSC | Current Scene = " + SceneManager.GetActiveScene().name);
         // Starts Game at Main Menu
@@ -70,7 +72,8 @@ public class GameStateController : MonoBehaviour
         Debug.Log("GSC | Start()");
         
         currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        
+        UIM.levelIndex = currentSceneIndex;
+
         Debug.Log("GSC | currentSceneIndex = " + currentSceneIndex);
 
         Debug.Log("GSC | UIM.levelIndex = " + UIM.levelIndex);
@@ -125,11 +128,6 @@ public class GameStateController : MonoBehaviour
         }
     }
     #endregion
-
-    public void completeLevel()
-    {
-        LoadMainMenu();
-    }
 
     #region Mouse State Control
     /// <summary>
@@ -283,10 +281,10 @@ public class GameStateController : MonoBehaviour
         }
     }
 
-    public bool GetVictoryBool(int sceneIndex)
+    public bool GetVictoryBool(int levelIndex)
     {
-        Debug.Log("GSC | GetVictoryBool(" + sceneIndex + ")");
-        switch (sceneIndex)
+        Debug.Log("GSC | GetVictoryBool(" + levelIndex + ")");
+        switch (levelIndex)
         {
             case 2:
                 // Air Win
@@ -332,39 +330,38 @@ public class GameStateController : MonoBehaviour
 
     /// <summary>
     /// LoadLevel() | Purpose:
-    /// Switcth statement that uses the UIM.levelDecider to
-    /// select the target scene to call SceneManager.LoadScene()
+    /// Switch statement that uses the UIM.levelDecider to select the
+    /// target scene to call SceneManager.LoadScene(int sceneBuildIndex)
     /// </summary>
-    public void LoadLevel()
+    public void LoadLevel(int levelIndex)
     {
-        Debug.Log("GSC | LoadLevel()");
-        Debug.Log("GSC | UIM.levelDecider = " + UIM.levelIndex);
-        switch (UIM.levelIndex)
+        Debug.Log("GSC | LoadLevel(" + levelIndex + ")");
+        switch (levelIndex)
         {
             case 1:
                 // Menu Scene
-                SceneManager.LoadScene(UIM.levelIndex);
+                SceneManager.LoadScene(levelIndex);
                 break;
             case 2:
                 // Air Scene
-                SceneManager.LoadScene(UIM.levelIndex);
+                SceneManager.LoadScene(levelIndex);
                 break;
             case 3:
                 // Earth Scene
-                SceneManager.LoadScene(UIM.levelIndex);
+                SceneManager.LoadScene(levelIndex);
                 break;
             case 4:
                 // Fire Scene
-                SceneManager.LoadScene(UIM.levelIndex);
+                SceneManager.LoadScene(levelIndex);
                 break;
             case 5:
                 // Water Scene
-                SceneManager.LoadScene(UIM.levelIndex);
+                SceneManager.LoadScene(levelIndex);
                 break;
             default:
                 // Default Case loads the 'Test Scene'
                 UIM.levelIndex = 0;
-                SceneManager.LoadScene(UIM.levelIndex);
+                SceneManager.LoadScene(levelIndex);
                 break;
         }
     }
