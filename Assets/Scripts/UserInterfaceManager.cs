@@ -133,7 +133,7 @@ public class UserInterfaceManager : MonoBehaviour
         camera.LookAt(worldWaypoints[levelIndex - 2]);
         yield return new WaitForSeconds(5f);
 
-        FindObjectOfType<GameStateController>().LoadLevel();
+        FindObjectOfType<GameStateController>().LoadLevel(levelIndex);
     }
 
     #region MainMenu
@@ -435,32 +435,32 @@ public class UserInterfaceManager : MonoBehaviour
     public void Level1()
     {
         levelIndex = 1;
-        Debug.Log("UIM | levelDecide = " + levelIndex);
-        FindObjectOfType<GameStateController>().LoadLevel();
+        Debug.Log("UIM | Level1() - levelDecide = " + levelIndex);
+        //FindObjectOfType<GameStateController>().LoadLevel();
     }
     public void Level2()
     {
         levelIndex = 2;
-        Debug.Log("UIM | levelDecide = " + levelIndex);
-        FindObjectOfType<GameStateController>().LoadLevel();
+        Debug.Log("UIM | Level2() - levelDecide = " + levelIndex);
+        //FindObjectOfType<GameStateController>().LoadLevel();
     }
     public void Level3()
     {
         levelIndex = 3;
-        Debug.Log("UIM | levelDecide = " + levelIndex);
-        FindObjectOfType<GameStateController>().LoadLevel();
+        Debug.Log("UIM | Level3() - levelDecide = " + levelIndex);
+        //FindObjectOfType<GameStateController>().LoadLevel();
     }
     public void Level4()
     {
         levelIndex = 4;
-        Debug.Log("UIM | levelDecide = " + levelIndex);
-        FindObjectOfType<GameStateController>().LoadLevel();
+        Debug.Log("UIM | Level4() - levelDecide = " + levelIndex);
+        //FindObjectOfType<GameStateController>().LoadLevel();
     }
     public void Level5()
     {
         levelIndex = 5;
-        Debug.Log("UIM | levelDecide = " + levelIndex);
-        FindObjectOfType<GameStateController>().LoadLevel();
+        Debug.Log("UIM | Level5() - levelDecide = " + levelIndex);
+        //FindObjectOfType<GameStateController>().LoadLevel();
     }
     #endregion
 
